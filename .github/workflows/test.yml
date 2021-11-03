@@ -63,11 +63,11 @@ jobs:
     - name: Run tests
       run: npx hardhat coverage
 
-    - name: Install python building tools
-      run: pip3 install -r predeployed/scripts/requirements.txt
+    # - name: Install python building tools
+    #   run: pip3 install -r predeployed/scripts/requirements.txt
 
-    - name: Install python testing staff
-      run: pip3 install -r predeployed/test/requirements.txt
+    # - name: Install python testing staff
+    #   run: pip3 install -r predeployed/test/requirements.txt
 
     # - name: Install geth
     #   run: |
