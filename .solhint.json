@@ -1,0 +1,21 @@
+{
+  "extends": "solhint:all",
+  "rules": {
+    "avoid-tx-origin": "error",
+    "check-send-result": "error",
+    "comprehensive-interface": "error",
+    "contract-name-camelcase": "error",
+    "code-complexity": "error",
+    "compiler-version": ["error","0.8.9"],    
+    "func-name-mixedcase": "error",
+    "func-visibility": ["warn",{"ignoreConstructors":true}],
+    "function-max-lines": "error",
+    "no-empty-blocks": "error",
+    "no-inline-assembly": "error",
+    "no-unused-vars": "error",
+    "ordering": "error",
+    "private-vars-leading-underscore": "error",
+    "state-visibility": "error",
+    "visibility-modifier-order": "error"
+  }
+}

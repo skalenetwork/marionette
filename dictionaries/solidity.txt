@@ -1,0 +1,2 @@
+solidityKeccak
+struct

@@ -1,0 +1,14 @@
+codecov
+ethersproject
+initializable
+mypy
+nomiclabs
+popen
+pylint
+pypi
+pytest
+pythonpath
+setuptools
+solhint
+typechain
+venv

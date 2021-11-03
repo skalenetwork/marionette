@@ -1,3 +1,11 @@
+# custom
+.coverage
+.vscode/
+/artifacts/
+cache/
+coverage.json
+typechain-types/
+
 # Logs
 logs
 *.log
