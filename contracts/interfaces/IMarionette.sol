@@ -26,5 +26,13 @@ import "@skalenetwork/ima-interfaces/IMessageReceiver.sol";
 
 interface IMarionette is IMessageReceiver {
     function initialize(address owner, address ima) external;
-    function encodeFunctionCall(address receiver, uint value, bytes calldata data) external pure returns (bytes memory);
+    function execute(address target, uint value, bytes calldata data) external returns (bytes memory);
+    function encodeFunctionCall(
+        address receiver,
+        uint value,
+        bytes calldata data
+    )
+        external
+        pure
+        returns (bytes memory);
 }

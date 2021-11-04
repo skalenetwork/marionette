@@ -73,6 +73,13 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
         return address(0);
     }
 
+    function execute(address target, uint value, bytes calldata data) external override returns (bytes memory) {
+        require(hasRole(PUPPETEER_ROLE, msg.sender), "Access violation");
+
+        return target.functionCallWithValue(data, value);
+    }
+
+
     function encodeFunctionCall(
         address receiver,
         uint value,
