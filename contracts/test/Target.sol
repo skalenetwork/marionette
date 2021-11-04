@@ -57,7 +57,7 @@ contract Target is ITarget {
     }
 
     function sendMessage(address from, IMessageReceiver receiver, bytes calldata message) external override {
-        receiver.postMessage("D2 schain", from, message);
+        require(receiver.postMessage("D2 schain", from, message) == address(0), "postMessage call failed");
     }
 
     function sendEth(address payable receiver, uint value) external override {

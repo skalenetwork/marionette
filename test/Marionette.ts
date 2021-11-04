@@ -21,7 +21,7 @@ describe("Marionette", () => {
 
     beforeEach(async () => {
         [ owner, external, hacker ] = await ethers.getSigners();
-        
+
         target = await (await ethers.getContractFactory("Target")).deploy();
         ima = await (await ethers.getContractFactory("ImaMock")).deploy();
 

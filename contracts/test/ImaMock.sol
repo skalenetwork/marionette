@@ -30,6 +30,6 @@ interface IImaMock {
 
 contract ImaMock is IImaMock {
     function sendMessage(address from, IMessageReceiver to, bytes calldata message) external override {
-        to.postMessage("D2 schain", from, message);
+        require(to.postMessage("D2 schain", from, message) == address(0), "postMessage call failed");
     }
 }
