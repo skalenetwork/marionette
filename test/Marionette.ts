@@ -68,7 +68,7 @@ describe("Marionette", () => {
         const stringValue = "Hello from D2";
 
         it ("should allow owner to call contract", async () => {
-            await marionette.execute(
+            const result = await marionette.execute(
                 target.address,
                 amount,
                 target.interface.encodeFunctionData(
@@ -76,11 +76,14 @@ describe("Marionette", () => {
                     [uintValue, stringValue]
                 ),
                 {value: amount}
-            )
-                .should.emit(marionette, "EtherReceived")
+            );
+            result.should
+                .emit(marionette, "EtherReceived")
                 .withArgs(owner.address, amount)
                 .emit(marionette, "EtherSent")
-                .withArgs(target.address, amount)
+                .withArgs(target.address, amount);
+
+            result.should
                 .emit(target, "ExecutionResult")
                 .withArgs(uintValue, stringValue)
                 .emit(target, "EtherReceived")
