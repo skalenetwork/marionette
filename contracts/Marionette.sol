@@ -30,6 +30,7 @@ import "./interfaces/IMarionette.sol";
 contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
 
     using AddressUpgradeable for address;
+    using AddressUpgradeable for address payable;
 
     struct FunctionCall {
         address receiver;
@@ -40,9 +41,23 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
     bytes32 public constant IMA_ROLE = keccak256("IMA_ROLE");
     bytes32 public constant PUPPETEER_ROLE = keccak256("PUPPETEER");
 
+    event EtherReceived(
+        address sender,
+        uint amount
+    );
+
+    event EtherSent(
+        address receiver,
+        uint amount
+    );
+
     event FunctionCallResult (
         bytes output
     );
+
+    receive() external payable override {
+        emit EtherReceived(msg.sender, msg.value);
+    }
 
     function initialize(address owner, address ima) external override initializer {
         AccessControlEnumerableUpgradeable.__AccessControlEnumerable_init();
@@ -73,12 +88,15 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
         return address(0);
     }
 
-    function execute(address target, uint value, bytes calldata data) external override returns (bytes memory) {
+    function execute(address target, uint value, bytes calldata data) external payable override returns (bytes memory) {
         require(hasRole(PUPPETEER_ROLE, msg.sender), "Access violation");
 
         return target.functionCallWithValue(data, value);
     }
 
+    function sendEth(address payable target, uint value) external payable override {
+        target.sendValue(value);
+    }
 
     function encodeFunctionCall(
         address receiver,
