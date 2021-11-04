@@ -27,7 +27,7 @@ import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
 interface ITarget {
     receive() external payable;
     function sendEth(address payable receiver, uint value) external;
-    function targetFunction(uint number, string calldata line) external;
+    function targetFunction(uint number, string calldata line) external payable;
 }
 
 contract Target is ITarget {
@@ -47,8 +47,11 @@ contract Target is ITarget {
         emit EtherReceived(msg.sender, msg.value);
     }
 
-    function targetFunction(uint number, string calldata line) external override {
+    function targetFunction(uint number, string calldata line) external payable override {
         emit ExecutionResult(number, line);
+        if (msg.value > 0) {
+            emit EtherReceived(msg.sender, msg.value);
+        }
     }
 
     function sendEth(address payable receiver, uint value) external override {

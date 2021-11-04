@@ -40,6 +40,7 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
 
     bytes32 public constant IMA_ROLE = keccak256("IMA_ROLE");
     bytes32 public constant PUPPETEER_ROLE = keccak256("PUPPETEER");
+    string public constant ACCESS_VIOLATION = "Access violation";
 
     event EtherReceived(
         address sender,
@@ -78,9 +79,13 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
     returns (address)
     {
         require(hasRole(IMA_ROLE, msg.sender), "Sender is not IMA");
-        require(hasRole(PUPPETEER_ROLE, sender), "Access violation");
+        require(hasRole(PUPPETEER_ROLE, sender), ACCESS_VIOLATION);
 
         FunctionCall memory functionCall = _parseFunctionCall(data);
+
+        if (functionCall.value > 0) {
+            emit EtherSent(functionCall.receiver, functionCall.value);
+        }
 
         bytes memory output = functionCall.receiver.functionCallWithValue(functionCall.data, functionCall.value);
         emit FunctionCallResult(output);
@@ -89,12 +94,28 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
     }
 
     function execute(address target, uint value, bytes calldata data) external payable override returns (bytes memory) {
-        require(hasRole(PUPPETEER_ROLE, msg.sender), "Access violation");
+        require(hasRole(PUPPETEER_ROLE, msg.sender), ACCESS_VIOLATION);
+
+        if (msg.value > 0) {
+            emit EtherReceived(msg.sender, msg.value);
+        }
+        if (value > 0) {
+            emit EtherSent(target, value);
+        }
 
         return target.functionCallWithValue(data, value);
     }
 
     function sendEth(address payable target, uint value) external payable override {
+        require(hasRole(PUPPETEER_ROLE, msg.sender), ACCESS_VIOLATION);
+
+        if (msg.value > 0) {
+            emit EtherReceived(msg.sender, msg.value);
+        }
+        if (value > 0) {
+            emit EtherSent(target, value);
+        }
+
         target.sendValue(value);
     }
 
