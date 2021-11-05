@@ -2,7 +2,7 @@ from web3.auto import w3
 from predeployed_generator.openzeppelin.proxy_admin_generator import ProxyAdminGenerator
 
 from marionette_predeployed import UpgradeableMarionetteGenerator, MARIONETTE_ADDRESS
-from marionette_predeployd.marionette_generator import MarionetteGenerator
+from marionette_predeployed.marionette_generator import MarionetteGenerator
 from .tools.test_solidity_project import TestSolidityProject
 
 
