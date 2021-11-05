@@ -36,7 +36,7 @@
     "@types/node": "^16.11.6",
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
-    "cspell": "^5.12.5",
+    "cspell": "^5.12.6",
     "ethereum-waffle": "^3.0.0",
     "ethers": "^5.5.1",
     "hardhat": "^2.6.7",
