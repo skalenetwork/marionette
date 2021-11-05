@@ -25,7 +25,8 @@ class TestUpgradeableMarionetteGenerator(TestSolidityProject):
                 proxy_admin_address=self.PROXY_ADMIN_ADDRESS,
                 owner=self.OWNER_ADDRESS,
                 schain_owner=self.SCHAIN_OWNER_ADDRESS,
-                ima=self.IMA_ADDRESS),
+                ima=self.IMA_ADDRESS,
+                marionette=MARIONETTE_ADDRESS),
             **proxy_admin_generator.generate_allocation(
                 self.PROXY_ADMIN_ADDRESS,
                 owner_address=self.OWNER_ADDRESS)
