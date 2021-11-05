@@ -1,0 +1,6 @@
+__pycache__
+src/marionette_predeployed/artifacts/*
+!src/marionette_predeployed/artifacts/.keep
+test/venv
+version.txt
+*.egg-info/

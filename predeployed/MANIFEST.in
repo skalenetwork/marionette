@@ -1,0 +1,3 @@
+graft src/marionette_predeployed/artifacts
+include src/marionette_predeployed/py.typed
+include version.txt

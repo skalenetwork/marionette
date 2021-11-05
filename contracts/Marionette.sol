@@ -39,7 +39,7 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
     }
 
     bytes32 public constant IMA_ROLE = keccak256("IMA_ROLE");
-    bytes32 public constant PUPPETEER_ROLE = keccak256("PUPPETEER");
+    bytes32 public constant PUPPETEER_ROLE = keccak256("PUPPETEER_ROLE");
     string public constant ACCESS_VIOLATION = "Access violation";
 
     event EtherReceived(
@@ -62,7 +62,7 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
 
     function initialize(address owner, address ima) external override initializer {
         AccessControlEnumerableUpgradeable.__AccessControlEnumerable_init();
-        AccessControlEnumerableUpgradeable._setupRole(DEFAULT_ADMIN_ROLE, owner);
+        AccessControlEnumerableUpgradeable._setupRole(DEFAULT_ADMIN_ROLE, address(this));
         AccessControlEnumerableUpgradeable._setupRole(PUPPETEER_ROLE, owner);
         if (ima != address(0)) {
             AccessControlEnumerableUpgradeable._setupRole(IMA_ROLE, ima);

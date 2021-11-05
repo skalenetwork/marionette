@@ -1,0 +1,35 @@
+# marionette-predeployed
+
+## Description
+
+A tool for generating predeployed marionette smart contract
+
+## Installation
+
+```console
+pip install marionette-predeployed
+```
+
+## Usage example
+
+```python
+from marionette_predeployed import  UpgradeableMarionetteGenerator, MARIONETTE_ADDRESS, MARIONETTE_IMPLEMENTATION_ADDRESS
+
+OWNER_ADDRESS = '0xd200000000000000000000000000000000000000'
+PROXY_ADMIN_ADDRESS = '0xd200000000000000000000000000000000000001'
+
+marionette_generator = UpgradeableMarionetteGenerator()
+
+genesis = {
+    # genesis block parameters
+    'alloc': {
+        **marionette_generator.generate_allocation(
+            contract_address=MARIONETTE_ADDRESS,
+            implementation_address=MARIONETTE_IMPLEMENTATION_ADDRESS,
+            schain_owner=OWNER_ADDRESS,
+            proxy_admin_address=PROXY_ADMIN_ADDRESS
+        )
+    }
+}
+
+```
