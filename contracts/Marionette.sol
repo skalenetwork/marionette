@@ -83,40 +83,31 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
 
         FunctionCall memory functionCall = _parseFunctionCall(data);
 
-        if (functionCall.value > 0) {
-            emit EtherSent(functionCall.receiver, functionCall.value);
-        }
-
-        bytes memory output = functionCall.receiver.functionCallWithValue(functionCall.data, functionCall.value);
+        bytes memory output = _doCall(payable(functionCall.receiver), functionCall.value, functionCall.data);        
         emit FunctionCallResult(output);
 
         return address(0);
     }
 
-    function execute(address target, uint value, bytes calldata data) external payable override returns (bytes memory) {
+    function execute(
+        address payable target,
+        uint value,
+        bytes calldata data
+    )
+        external
+        payable
+        override
+        returns (bytes memory)
+    {
         require(hasRole(PUPPETEER_ROLE, msg.sender), ACCESS_VIOLATION);
 
-        if (msg.value > 0) {
-            emit EtherReceived(msg.sender, msg.value);
-        }
-        if (value > 0) {
-            emit EtherSent(target, value);
-        }
-
-        return target.functionCallWithValue(data, value);
+        return _doCall(target, value, data);
     }
 
     function sendEth(address payable target, uint value) external payable override {
         require(hasRole(PUPPETEER_ROLE, msg.sender), ACCESS_VIOLATION);
 
-        if (msg.value > 0) {
-            emit EtherReceived(msg.sender, msg.value);
-        }
-        if (value > 0) {
-            emit EtherSent(target, value);
-        }
-
-        target.sendValue(value);
+        _doCall(target, value, "0x");
     }
 
     function encodeFunctionCall(
@@ -133,6 +124,29 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
     }
 
     // private
+
+    function _doCall(address payable target, uint value, bytes memory data) private returns (bytes memory) {
+
+        if (msg.value > 0) {
+            emit EtherReceived(msg.sender, msg.value);
+        }
+
+        if (value > 0) {
+            emit EtherSent(target, value);
+        }
+
+        if (target.isContract()) {
+            if (data.length >= 4) {
+                return target.functionCallWithValue(data, value);
+            } else {
+                target.sendValue(value);
+                return "0x";
+            }                        
+        } else {
+            target.sendValue(value);
+            return "0x";
+        }
+    }
 
     function _parseFunctionCall(bytes calldata data) private pure returns (FunctionCall memory functionCall) {
         (functionCall.receiver, functionCall.value, functionCall.data) = abi.decode(data, (address, uint, bytes));

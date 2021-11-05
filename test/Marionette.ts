@@ -60,6 +60,26 @@ describe("Marionette", () => {
             await marionette.connect(hacker).sendEth(target.address, amount, {value: amount})
                 .should.be.eventually.rejectedWith("Access violation");
         });
+
+        describe("Calls from IMA", () => {
+            it("Should transfer ETH using IMA", async () => {
+                await owner.sendTransaction({to: marionette.address, value: amount})
+                    .should.emit(marionette, "EtherReceived")
+                    .withArgs(owner.address, amount);
+
+                await ima.sendMessage(
+                    owner.address,
+                    marionette.address,
+                    await marionette.encodeFunctionCall(
+                        owner.address,
+                        amount,
+                        "0x"
+                    )
+                )
+                    .should.emit(marionette, "EtherSent")
+                    .withArgs(owner.address, amount);
+            })
+        });
     });
 
     describe("Contract calls", () => {
@@ -68,7 +88,7 @@ describe("Marionette", () => {
         const stringValue = "Hello from D2";
 
         it ("should allow owner to call contract", async () => {
-            const result = await marionette.execute(
+            const transaction = await marionette.execute(
                 target.address,
                 amount,
                 target.interface.encodeFunctionData(
@@ -77,17 +97,10 @@ describe("Marionette", () => {
                 ),
                 {value: amount}
             );
-            result.should
-                .emit(marionette, "EtherReceived")
-                .withArgs(owner.address, amount)
-                .emit(marionette, "EtherSent")
-                .withArgs(target.address, amount);
-
-            result.should
-                .emit(target, "ExecutionResult")
-                .withArgs(uintValue, stringValue)
-                .emit(target, "EtherReceived")
-                .withArgs(marionette.address, amount);
+            transaction.should.emit(marionette, "EtherReceived").withArgs(owner.address, amount);
+            transaction.should.emit(marionette, "EtherSent").withArgs(target.address, amount);
+            transaction.should.emit(target, "ExecutionResult").withArgs(uintValue, stringValue);
+            transaction.should.emit(target, "EtherReceived").withArgs(marionette.address, amount);
 
             await target.sendEth(owner.address, amount);
         });
@@ -100,7 +113,7 @@ describe("Marionette", () => {
         describe("Calls from IMA", () => {
 
             it ("should allow IMA to trigger function call", async () => {
-                await ima.sendMessage(
+                const transaction = await ima.sendMessage(
                     owner.address,
                     marionette.address,
                     await marionette.encodeFunctionCall(
@@ -111,9 +124,9 @@ describe("Marionette", () => {
                             [uintValue, stringValue]
                         )
                     )
-                ).should
-                    .emit(target, "ExecutionResult")
-                    .withArgs(uintValue, stringValue);
+                );
+                transaction.should.emit(target, "ExecutionResult").withArgs(uintValue, stringValue);
+                transaction.should.emit(marionette, "FunctionCallResult").withArgs("0x");
             });
 
             it ("should not allow everyone to trigger function call through IMA", async () => {

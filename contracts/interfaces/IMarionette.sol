@@ -27,7 +27,7 @@ import "@skalenetwork/ima-interfaces/IMessageReceiver.sol";
 interface IMarionette is IMessageReceiver {
     receive() external payable;
     function initialize(address owner, address ima) external;
-    function execute(address target, uint value, bytes calldata data) external payable returns (bytes memory);
+    function execute(address payable target, uint value, bytes calldata data) external payable returns (bytes memory);
     function sendEth(address payable target, uint value) external payable;
     function encodeFunctionCall(
         address receiver,
