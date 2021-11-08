@@ -54,7 +54,7 @@ class TestUpgradeableMarionetteGenerator(TestSolidityProject):
             assert marionette.functions.getRoleMember(MarionetteGenerator.IMA_ROLE, 0).call() == self.IMA_ADDRESS
             assert marionette.functions.hasRole(MarionetteGenerator.IMA_ROLE, self.IMA_ADDRESS).call()
 
-    def test_puppeter_role(self, tmpdir):
+    def test_PUPPETEER_ROLE(self, tmpdir):
         genesis = self.prepare_genesis()
 
         with self.run_geth(tmpdir, genesis):
@@ -62,9 +62,9 @@ class TestUpgradeableMarionetteGenerator(TestSolidityProject):
 
             marionette = w3.eth.contract(address=MARIONETTE_ADDRESS, abi=self.get_marionette_abi())
 
-            assert marionette.functions.getRoleMemberCount(MarionetteGenerator.PUPPETER_ROLE).call() == 2
-            assert marionette.functions.getRoleMember(MarionetteGenerator.PUPPETER_ROLE, 0).call() == self.OWNER_ADDRESS
-            assert marionette.functions.hasRole(MarionetteGenerator.PUPPETER_ROLE, self.OWNER_ADDRESS).call()
-            assert marionette.functions.getRoleMember(MarionetteGenerator.PUPPETER_ROLE, 1).call() == self.SCHAIN_OWNER_ADDRESS
-            assert marionette.functions.hasRole(MarionetteGenerator.PUPPETER_ROLE, self.SCHAIN_OWNER_ADDRESS).call()
+            assert marionette.functions.getRoleMemberCount(MarionetteGenerator.PUPPETEER_ROLE).call() == 2
+            assert marionette.functions.getRoleMember(MarionetteGenerator.PUPPETEER_ROLE, 0).call() == self.OWNER_ADDRESS
+            assert marionette.functions.hasRole(MarionetteGenerator.PUPPETEER_ROLE, self.OWNER_ADDRESS).call()
+            assert marionette.functions.getRoleMember(MarionetteGenerator.PUPPETEER_ROLE, 1).call() == self.SCHAIN_OWNER_ADDRESS
+            assert marionette.functions.hasRole(MarionetteGenerator.PUPPETEER_ROLE, self.SCHAIN_OWNER_ADDRESS).call()
     
