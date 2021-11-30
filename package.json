@@ -39,7 +39,7 @@
     "cspell": "^5.13.0",
     "ethereum-waffle": "^3.0.0",
     "ethers": "^5.5.1",
-    "hardhat": "^2.6.8",
+    "hardhat": "^2.7.0",
     "kill-port": "^1.6.1",
     "lodash": "^4.17.21",
     "solhint": "^3.3.6",
