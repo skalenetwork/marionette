@@ -80,6 +80,7 @@ jobs:
         echo "Package version $PACKAGE_VERSION"
         pip install marionette-predeployed==$PACKAGE_VERSION
         ./predeployed/scripts/generate_abi.py > data/marionette-$VERSION-predeployed-abi.json
+        ll data
 
     - name: Create Release
       id: create_release
