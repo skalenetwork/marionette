@@ -76,9 +76,7 @@ jobs:
       env:
         VERSION: ${{ env.VERSION }}
       run: |
-        export PACKAGE_VERSION=$(cat predeployed/version.txt)
-        echo "Package version $PACKAGE_VERSION"
-        pip install marionette-predeployed==$PACKAGE_VERSION
+        pip install predeployed/dist/*.whl
         ./predeployed/scripts/generate_abi.py > data/marionette-$VERSION-predeployed-abi.json
         ls data
 
