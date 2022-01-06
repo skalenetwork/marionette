@@ -7,12 +7,11 @@ on:
       - develop
       - beta
       - stable
-  push:
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-    # if: github.event.pull_request.merged    
+    if: github.event.pull_request.merged    
     
     steps:
     - uses: actions/checkout@v2
@@ -77,7 +76,7 @@ jobs:
         VERSION: ${{ env.VERSION }}
       run: |
         pip install predeployed/dist/*.whl
-        ./predeployed/scripts/generate_abi.py > data/marionette-$VERSION-predeployed-abi.json
+        ./predeployed/scripts/generate_abi.py > data/marionette-$VERSION-abi.json
         ls data
 
     - name: Create Release
