@@ -75,7 +75,7 @@ jobs:
     - name: Generate ABI
       env:
         VERSION: ${{ env.VERSION }}
-      run:
+      run: |
         export PACKAGE_VERSION=$(python predeployed/scripts/generate_package_version.py)
         echo "Package version $PACKAGE_VERSION"
         pip install marionette-predeployed==$PACKAGE_VERSION
