@@ -2,9 +2,7 @@ import { ethers  } from "hardhat";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import * as chai from "chai"
 import chaiAsPromised from "chai-as-promised";
-import { Marionette } from "../typechain-types";
-import { Target } from "../typechain-types/Target";
-import { ImaMock } from "../typechain-types/ImaMock";
+import { Marionette, Target, ImaMock } from "../typechain-types";
 
 chai.should();
 chai.use(chaiAsPromised);
