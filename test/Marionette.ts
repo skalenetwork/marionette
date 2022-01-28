@@ -95,10 +95,10 @@ describe("Marionette", () => {
                 ),
                 {value: amount}
             );
-            transaction.should.emit(marionette, "EtherReceived").withArgs(owner.address, amount);
-            transaction.should.emit(marionette, "EtherSent").withArgs(target.address, amount);
-            transaction.should.emit(target, "ExecutionResult").withArgs(uintValue, stringValue);
-            transaction.should.emit(target, "EtherReceived").withArgs(marionette.address, amount);
+            await transaction.should.emit(marionette, "EtherReceived").withArgs(owner.address, amount);
+            await transaction.should.emit(marionette, "EtherSent").withArgs(target.address, amount);
+            await transaction.should.emit(target, "ExecutionResult").withArgs(uintValue, stringValue);
+            await transaction.should.emit(target, "EtherReceived").withArgs(marionette.address, amount);
 
             await target.sendEth(owner.address, amount);
         });
@@ -123,8 +123,8 @@ describe("Marionette", () => {
                         )
                     )
                 );
-                transaction.should.emit(target, "ExecutionResult").withArgs(uintValue, stringValue);
-                transaction.should.emit(marionette, "FunctionCallResult").withArgs("0x");
+                await transaction.should.emit(target, "ExecutionResult").withArgs(uintValue, stringValue);
+                await transaction.should.emit(marionette, "FunctionCallResult").withArgs("0x");
             });
 
             it ("should not allow everyone to trigger function call through IMA", async () => {
