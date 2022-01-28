@@ -6,7 +6,7 @@
     "comprehensive-interface": "error",
     "contract-name-camelcase": "error",
     "code-complexity": "error",
-    "compiler-version": ["error","0.8.9"],    
+    "compiler-version": ["error","0.8.11"],    
     "func-name-mixedcase": "error",
     "func-visibility": ["warn",{"ignoreConstructors":true}],
     "function-max-lines": "error",
