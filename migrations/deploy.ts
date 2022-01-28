@@ -1,11 +1,9 @@
 // tslint:disable:no-console
 
 import { promises as fs } from 'fs';
-import { Interface } from "ethers/lib/utils";
-import { ethers, upgrades, network, artifacts } from "hardhat";
-import { Marionette } from "../typechain-types";
+import { ethers, upgrades, network } from "hardhat";
 import { getAbi } from './tools/abi';
-import { verify, verifyProxy } from './tools/verification';
+import { verifyProxy } from './tools/verification';
 import { getVersion } from './tools/version';
 
 
@@ -34,15 +32,13 @@ async function main() {
 
     const ownerAddress = deployer.address;
     const imaAddress = process.env.IMA_ADDRESS ? process.env.IMA_ADDRESS : ethers.constants.AddressZero;
-    let marionetteAddress: string;
-    let marionetteInterface: Interface;
-
+    
     console.log("Deploy Marionette");
     const marionetteUpgradeableFactory = await ethers.getContractFactory("Marionette");
     const marionette = (await upgrades.deployProxy(marionetteUpgradeableFactory, [ownerAddress, imaAddress]));
     await marionette.deployTransaction.wait();
-    marionetteAddress = marionette.address;
-    marionetteInterface = marionette.interface;
+    const marionetteAddress = marionette.address;
+    const marionetteInterface = marionette.interface;
     await verifyProxy("Marionette", marionette.address, []);
 
 
