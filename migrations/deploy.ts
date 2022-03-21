@@ -31,6 +31,9 @@ async function main() {
 
     const ownerAddress = deployer.address;
     const imaAddress = process.env.IMA_ADDRESS ? process.env.IMA_ADDRESS : ethers.constants.AddressZero;
+    if (imaAddress === ethers.constants.AddressZero) {
+        console.log("IMA MessageProxy was not passed. Zero address will be used.");
+    }
     
     console.log("Deploy Marionette");
     const marionetteUpgradeableFactory = await ethers.getContractFactory("Marionette");
