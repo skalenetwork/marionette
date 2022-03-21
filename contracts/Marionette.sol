@@ -19,7 +19,7 @@
     along with SKALE Manager.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-pragma solidity 0.8.9;
+pragma solidity 0.8.11;
 
 import "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
@@ -62,10 +62,10 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
 
     function initialize(address owner, address ima) external override initializer {
         AccessControlEnumerableUpgradeable.__AccessControlEnumerable_init();
-        AccessControlEnumerableUpgradeable._setupRole(DEFAULT_ADMIN_ROLE, address(this));
-        AccessControlEnumerableUpgradeable._setupRole(PUPPETEER_ROLE, owner);
+        AccessControlUpgradeable._setupRole(DEFAULT_ADMIN_ROLE, address(this));
+        AccessControlUpgradeable._setupRole(PUPPETEER_ROLE, owner);
         if (ima != address(0)) {
-            AccessControlEnumerableUpgradeable._setupRole(IMA_ROLE, ima);
+            AccessControlUpgradeable._setupRole(IMA_ROLE, ima);
         }
     }
 
