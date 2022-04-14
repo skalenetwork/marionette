@@ -33,6 +33,7 @@ class TestUpgradeableMarionetteGenerator(TestSolidityProject):
             })
 
     def test_default_admin_role(self, tmpdir):
+        self.datadir = tmpdir
         genesis = self.prepare_genesis()
 
         with self.run_geth(tmpdir, genesis):
@@ -44,6 +45,7 @@ class TestUpgradeableMarionetteGenerator(TestSolidityProject):
             assert marionette.functions.hasRole(MarionetteGenerator.DEFAULT_ADMIN_ROLE, MARIONETTE_ADDRESS).call()
 
     def test_ima_role(self, tmpdir):
+        self.datadir = tmpdir
         genesis = self.prepare_genesis()
 
         with self.run_geth(tmpdir, genesis):
@@ -55,6 +57,7 @@ class TestUpgradeableMarionetteGenerator(TestSolidityProject):
             assert marionette.functions.hasRole(MarionetteGenerator.IMA_ROLE, self.IMA_ADDRESS).call()
 
     def test_PUPPETEER_ROLE(self, tmpdir):
+        self.datadir = tmpdir
         genesis = self.prepare_genesis()
 
         with self.run_geth(tmpdir, genesis):

@@ -10,7 +10,11 @@
     "byzantiumBlock": 0,
     "constantinopleBlock": 0,
     "berlinBlock": 0,
-    "londonBlock": 0
+    "londonBlock": 0,
+    "clique": {
+      "period": 5,
+      "epoch": 30000
+    }
   },
   "nonce": "0x33",
   "timestamp": "0x0",

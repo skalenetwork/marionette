@@ -16,22 +16,24 @@ async function main() {
 
     const version = await getVersion();
 
-    // if ( ... ) {
-    //     console.log("Optional variables:");
-    //     console.log("IMA_ADDRESS");
-    //     console.log("");
-    //     console.log("For custom network do not forget to set:");
-    //     console.log("ENDPOINT - rpc endpoint");
-    //     console.log("PRIVATE_KEY - deployer private key");
-    //     console.log("GASPRICE - optional - desired gas price");
-    //     console.log("");
-    //     console.log("Usage example:");
-    //     console.log("IMA_ADDRESS=0xd2AAa00100000000000000000000000000000000 npx hardhat run migrations/deploy.ts --network custom")
-    //     process.exit(1);
-    // }
+    // Usage information:
+    //
+    //     Optional variables:
+    //     IMA_ADDRESS
+    //
+    //     For custom network do not forget to set:
+    //     ENDPOINT - rpc endpoint
+    //     PRIVATE_KEY - deployer private key
+    //     GASPRICE - optional - desired gas price
+    //
+    //     Usage example:
+    //     IMA_ADDRESS=0xd2AAa00100000000000000000000000000000000 npx hardhat run migrations/deploy.ts --network custom
 
     const ownerAddress = deployer.address;
     const imaAddress = process.env.IMA_ADDRESS ? process.env.IMA_ADDRESS : ethers.constants.AddressZero;
+    if (imaAddress === ethers.constants.AddressZero) {
+        console.log("IMA MessageProxy was not passed. Zero address will be used.");
+    }
     
     console.log("Deploy Marionette");
     const marionetteUpgradeableFactory = await ethers.getContractFactory("Marionette");
