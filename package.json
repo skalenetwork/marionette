@@ -42,7 +42,7 @@
     "eslint": "^8.17.0",
     "ethereum-waffle": "^3.4.4",
     "ethers": "^5.6.8",
-    "hardhat": "^2.9.7",
+    "hardhat": "^2.9.9",
     "kill-port": "^2.0.0",
     "lodash": "^4.17.21",
     "solhint": "^3.3.7",
