@@ -7,7 +7,6 @@ from marionette_predeployed.marionette_generator import MarionetteGenerator
 class UpgradeableMarionetteGenerator(UpgradeableContractGenerator):
     '''Generates upgradeable instance of Marionette contract
     '''
-    META_FILENAME = 'Marionette.meta.json'
 
     def __init__(self):
         super().__init__(implementation_generator=MarionetteGenerator())
