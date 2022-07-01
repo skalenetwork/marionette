@@ -21,7 +21,7 @@
     "no-hooks": "git config core.hooksPath .git/hooks"
   },
   "devDependencies": {
-    "@ethersproject/abi": "^5.6.1",
+    "@ethersproject/abi": "^5.6.4",
     "@ethersproject/bytes": "^5.5.0",
     "@ethersproject/providers": "^5.6.6",
     "@nomiclabs/hardhat-ethers": "^2.0.6",
