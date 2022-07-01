@@ -70,4 +70,7 @@ class TestUpgradeableMarionetteGenerator(TestSolidityProject):
             assert marionette.functions.hasRole(MarionetteGenerator.PUPPETEER_ROLE, self.OWNER_ADDRESS).call()
             assert marionette.functions.getRoleMember(MarionetteGenerator.PUPPETEER_ROLE, 1).call() == self.SCHAIN_OWNER_ADDRESS
             assert marionette.functions.hasRole(MarionetteGenerator.PUPPETEER_ROLE, self.SCHAIN_OWNER_ADDRESS).call()
-    
+
+    def test_meta_info(self):
+        meta = UpgradeableMarionetteGenerator().get_meta()
+        assert meta['name'] == 'Marionette'
