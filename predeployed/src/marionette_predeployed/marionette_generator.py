@@ -13,6 +13,7 @@ class MarionetteGenerator(AccessControlEnumerableGenerator):
     '''
 
     ARTIFACT_FILENAME = 'Marionette.json'
+    META_FILENAME = 'Marionette.meta.json'
     DEFAULT_ADMIN_ROLE = (0).to_bytes(32, 'big')
     IMA_ROLE = w3.solidityKeccak(['string'], ['IMA_ROLE'])
     PUPPETEER_ROLE = w3.solidityKeccak(['string'], ['PUPPETEER_ROLE'])
@@ -46,11 +47,10 @@ class MarionetteGenerator(AccessControlEnumerableGenerator):
     ROLE_MEMBERS_SLOT = 151
 
     def __init__(self):
-        generator = MarionetteGenerator.from_hardhat_artifact(join(
-            dirname(__file__),
-            'artifacts',
-            self.ARTIFACT_FILENAME))
-        super().__init__(bytecode=generator.bytecode, abi=generator.abi)
+        generator = MarionetteGenerator.from_hardhat_artifact(
+            join(dirname(__file__), 'artifacts', self.ARTIFACT_FILENAME),
+            join(dirname(__file__), 'artifacts', self.META_FILENAME))
+        super().__init__(bytecode=generator.bytecode, abi=generator.abi, meta=generator.meta)
 
     @classmethod
     def generate_storage(cls, **kwargs) -> Dict[str, str]:
