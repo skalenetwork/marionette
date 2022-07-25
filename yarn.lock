@@ -908,16 +908,16 @@
   resolved "https://registry.yarnpkg.com/@openzeppelin/contracts-upgradeable/-/contracts-upgradeable-4.7.0.tgz#6437261286879d353f6de7bf3ac8216bef8a486d"
   integrity sha512-wO3PyoAaAV/rA77cK8H4c3SbO98QylTjfiFxyvURUZKTFLV180rnAvna1x7/Nxvt0Gqv+jt1sXKC7ygxsq8iCw==
 
-"@openzeppelin/hardhat-upgrades@^1.18.2":
-  version "1.18.2"
-  resolved "https://registry.yarnpkg.com/@openzeppelin/hardhat-upgrades/-/hardhat-upgrades-1.18.2.tgz#aea31f71d8853d9d8620c847bd90529f03d80518"
-  integrity sha512-KuLJgTNQ5lSi17g40S+r1kkqc4Mfkxw4U6IckrllmioI4zcSnPrxxLgBr3cG1p64P/iJJaEoZbuWcjg1Zb7QEQ==
+"@openzeppelin/hardhat-upgrades@^1.19.0":
+  version "1.19.0"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/hardhat-upgrades/-/hardhat-upgrades-1.19.0.tgz#8f17210b924eb04c3ea4aa9795c1bb01d8a7dc3f"
+  integrity sha512-351QqDO3nZ96g0BO/bQnaTflix4Nw4ELWC/hZ8PwicsuVxRmxN/GZhxPrs62AOdiQdZ+xweawrVXa5knliRd4A==
   dependencies:
-    "@openzeppelin/upgrades-core" "^1.15.0"
+    "@openzeppelin/upgrades-core" "^1.16.0"
     chalk "^4.1.0"
     proper-lockfile "^4.1.1"
 
-"@openzeppelin/upgrades-core@^1.15.0":
+"@openzeppelin/upgrades-core@^1.16.0":
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/@openzeppelin/upgrades-core/-/upgrades-core-1.16.1.tgz#a4c383fc628cc9d37d5a276def99a093c951644b"
   integrity sha512-+hejbeAfsZWIQL5Ih13gkdm2KO6kbERc1ektzcyb25/OtUwaRjIIHxW++LdC/3Hg5uzThVOzJBfiLdAbgwD+OA==
