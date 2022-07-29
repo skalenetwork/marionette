@@ -34,7 +34,7 @@
     "@types/chai-as-promised": "^7.1.5",
     "@types/mocha": "^9.1.1",
     "@types/node": "^18.0.6",
-    "@typescript-eslint/eslint-plugin": "^5.30.7",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
     "@typescript-eslint/parser": "^5.30.6",
     "chai": "^4.3.6",
     "chai-as-promised": "^7.1.1",
@@ -52,7 +52,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@openzeppelin/contracts-upgradeable": "^4.7.1",
+    "@openzeppelin/contracts-upgradeable": "^4.7.2",
     "@skalenetwork/ima-interfaces": "^0.0.1"
   }
 }
