@@ -1,6 +1,7 @@
 import { ethers  } from "hardhat";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import * as chai from "chai"
+import { expect } from "chai";
 import chaiAsPromised from "chai-as-promised";
 import { Marionette, Target, ImaMock } from "../typechain-types";
 
@@ -107,6 +108,24 @@ describe("Marionette", () => {
             await marionette.connect(hacker).execute(target.address, 0, "0x")
                 .should.be.eventually.rejectedWith("Access violation");
         });
+
+        it("should allow owner to set a version", async () => {
+            await expect(marionette.connect(hacker).setVersion("bad")).to.be.revertedWithCustomError(
+                marionette,
+                "Unauthorized"
+              );
+
+            await marionette.execute(
+                marionette.address,
+                0,
+                marionette.interface.encodeFunctionData(
+                    "setVersion",
+                    ["nice"]
+                )
+            );
+            (await marionette.version()).should.be.equal("nice");
+        });
+    
 
         describe("Calls from IMA", () => {
 
