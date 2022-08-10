@@ -119,7 +119,7 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
         _doCall(target, value, "0x");
     }
 
-    function setVersion(string calldata newVersion) external {
+    function setVersion(string calldata newVersion) external override {
         if (!hasRole(DEFAULT_ADMIN_ROLE, msg.sender)) 
             revert Unauthorized(msg.sender);
         emit VersionUpdated(version, newVersion);

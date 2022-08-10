@@ -1,4 +1,4 @@
-'''Module for generaration of predeployed Marionette smart contract'''
+'''Module for generation of predeployed Marionette smart contract'''
 
 from os.path import dirname, join
 from typing import Dict

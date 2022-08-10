@@ -1,13 +1,12 @@
 import { ethers } from "hardhat";
 import chalk from "chalk";
-import { Marionette } from "../typechain-types";
 import { upgrade, SkaleABIFile, getContractKeyInAbiFile, encodeTransaction } from "@skalenetwork/upgrade-tools"
 
 
 async function getMarionette(abi: SkaleABIFile) {
     return ((await ethers.getContractFactory("Marionette")).attach(
         abi[getContractKeyInAbiFile("Marionette") + "_address"] as string
-    )) as Marionette;
+    ));
 }
 
 export async function getDeployedVersion(abi: SkaleABIFile) {

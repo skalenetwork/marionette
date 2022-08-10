@@ -1,2 +1,5 @@
 solidityKeccak
 struct
+mload
+delegatecall
+chainid
