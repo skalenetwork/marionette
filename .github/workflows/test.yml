@@ -7,7 +7,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [14.x, 16.x]
         python-version: ["3.7.x", "3.8.x", "3.9.x"]
 
     env:
@@ -59,6 +59,9 @@ jobs:
 
     - name: Test deploy
       run: ./scripts/test_deploy.sh
+
+    - name: Test upgrade
+      run: ./scripts/test_upgrade.sh
 
     - name: Run tests
       run: npx hardhat coverage
