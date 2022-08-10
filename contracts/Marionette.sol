@@ -42,6 +42,8 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
     bytes32 public constant PUPPETEER_ROLE = keccak256("PUPPETEER_ROLE");
     string public constant ACCESS_VIOLATION = "Access violation";
 
+    string public version;
+
     event EtherReceived(
         address sender,
         uint amount
@@ -55,6 +57,13 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
     event FunctionCallResult (
         bytes output
     );
+
+    event VersionUpdated(
+        string oldVersion,
+        string newVersion
+    );
+
+    error Unauthorized(address unauthorizedSender);
 
     receive() external payable override {
         emit EtherReceived(msg.sender, msg.value);
@@ -108,6 +117,13 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
         require(hasRole(PUPPETEER_ROLE, msg.sender), ACCESS_VIOLATION);
 
         _doCall(target, value, "0x");
+    }
+
+    function setVersion(string calldata newVersion) external {
+        if (!hasRole(DEFAULT_ADMIN_ROLE, msg.sender)) 
+            revert Unauthorized(msg.sender);
+        emit VersionUpdated(version, newVersion);
+        version = newVersion;
     }
 
     function encodeFunctionCall(
