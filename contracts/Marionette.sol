@@ -104,7 +104,7 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
         return _doCall(target, value, data);
     }
 
-    function sendEth(address payable target, uint value) external payable override {
+    function sendFuel(address payable target, uint value) external payable override {
         require(hasRole(PUPPETEER_ROLE, msg.sender), ACCESS_VIOLATION);
 
         _doCall(target, value, "0x");
