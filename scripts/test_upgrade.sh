@@ -19,8 +19,7 @@ DEPLOYED_TAG=$(cat $GITHUB_WORKSPACE/DEPLOYED)
 DEPLOYED_VERSION=$(echo $DEPLOYED_TAG | cut -d '-' -f 1)
 DEPLOYED_DIR=$GITHUB_WORKSPACE/deployed-marionette/
 
-DEPLOYED_WITH_NODE_VERSION="lts/fermium"
-CURRENT_NODE_VERSION=$(nvm current)
+DEPLOYED_WITH_NODE_VERSION="lts/gallium"
 
 git clone --branch $DEPLOYED_TAG https://github.com/$GITHUB_REPOSITORY.git $DEPLOYED_DIR
 
@@ -38,7 +37,6 @@ ABI_FILENAME="marionette-$DEPLOYED_VERSION-localhost-abi-and-addresses.json"
 cp "data/$ABI_FILENAME" "$GITHUB_WORKSPACE/data"
 
 cd $GITHUB_WORKSPACE
-nvm use $CURRENT_NODE_VERSION
 rm -r --interactive=never $DEPLOYED_DIR
 
 ABI="data/$ABI_FILENAME" npx hardhat run migrations/upgrade.ts --network localhost

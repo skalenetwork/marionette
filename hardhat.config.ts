@@ -5,6 +5,23 @@ import "@nomiclabs/hardhat-etherscan";
 import "@nomicfoundation/hardhat-chai-matchers";
 import "@typechain/hardhat";
 import "solidity-coverage";
+import { utils, Wallet } from "ethers";
+import { HardhatNetworkAccountUserConfig } from "hardhat/types/config";
+
+function getAccounts() {
+  const accounts: HardhatNetworkAccountUserConfig[] = [];
+  const defaultBalance = utils.parseEther("2000000").toString();
+
+  const n = 10;
+  for (let i = 0; i < n; ++i) {
+    accounts.push({
+      privateKey: Wallet.createRandom().privateKey,
+      balance: defaultBalance
+    })
+  }
+
+  return accounts;
+}
 
 function getCustomUrl(url: string | undefined) {
   if (url) {
@@ -42,6 +59,10 @@ const config: HardhatUserConfig = {
     }
   },
   networks: {
+    hardhat: {
+      accounts: getAccounts(),
+      blockGasLimit: 12000000
+    },
     custom: {
       url: getCustomUrl(process.env.ENDPOINT),
       accounts: getCustomPrivateKey(process.env.PRIVATE_KEY),
