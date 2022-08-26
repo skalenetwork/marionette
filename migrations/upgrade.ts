@@ -48,8 +48,8 @@ async function main() {
         async (safeMockAddress, abi) => {
             const marionette = await getMarionette(abi);
             const PUPPETEER_ROLE = await marionette.PUPPETEER_ROLE();
-            const encodedSetVersion = marionette.interface.encodeFunctionData("grantRole", [PUPPETEER_ROLE, safeMockAddress]);
-            await marionette.execute(marionette.address, 0, encodedSetVersion);
+            const encodedGrantRole = marionette.interface.encodeFunctionData("grantRole", [PUPPETEER_ROLE, safeMockAddress]);
+            await marionette.execute(marionette.address, 0, encodedGrantRole);
         }
     );
 }

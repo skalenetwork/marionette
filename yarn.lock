@@ -951,10 +951,10 @@
   resolved "https://registry.yarnpkg.com/@skalenetwork/ima-interfaces/-/ima-interfaces-0.0.1.tgz#ed9645e004f671d03111b698faf1a90b2afdb7d0"
   integrity sha512-naLB8ZqyTZmRwayahx4wIuW9oCgB5/VI3XJhAoBXqBgVDuZU1p270kJSqT4eyh+MUttIBtnSzorzSbPteFs6AQ==
 
-"@skalenetwork/upgrade-tools@1.0.0-optional-contract-manager.7":
-  version "1.0.0-optional-contract-manager.7"
-  resolved "https://registry.yarnpkg.com/@skalenetwork/upgrade-tools/-/upgrade-tools-1.0.0-optional-contract-manager.7.tgz#3b9b99c7afb0e1ba834d9348c912ac45bca01a69"
-  integrity sha512-gpEZZIaPHa934I6Ti1GWOGS7Q8F10wKFUF3FbHCOYxAeVaTMCPgiKR2fA6WaD0dVP7ko9ovfvwORG6dCnnijEA==
+"@skalenetwork/upgrade-tools@1.0.0-optional-contract-manager.8":
+  version "1.0.0-optional-contract-manager.8"
+  resolved "https://registry.yarnpkg.com/@skalenetwork/upgrade-tools/-/upgrade-tools-1.0.0-optional-contract-manager.8.tgz#30343e9e1f9693f491c146ec7ca3aa6ab4659c5d"
+  integrity sha512-o7uk4CR15QvcayUmRzhNsqEmXs61r7URWnAx/hYOoQ4IYBGvqji59bZZShpIm0zy3RF9mAnqbF8LrwaY4rmO8g==
   dependencies:
     "@openzeppelin/contracts-upgradeable" "^4.4.2"
     axios "^0.27.2"
