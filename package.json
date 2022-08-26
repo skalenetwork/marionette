@@ -53,6 +53,6 @@
   "dependencies": {
     "@openzeppelin/contracts-upgradeable": "^4.7.2",
     "@skalenetwork/ima-interfaces": "^0.0.1",
-    "@skalenetwork/upgrade-tools": "1.0.0-optional-contract-manager.0"
+    "@skalenetwork/upgrade-tools": "1.0.0-optional-contract-manager.7"
   }
 }

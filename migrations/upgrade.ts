@@ -35,7 +35,7 @@ async function main() {
         "1.0.0",
         getDeployedVersion,
         setNewVersion,
-        ["Marionette"],
+        [],
         ["Marionette"],
         // async (safeTransactions, abi, contractManager) => {
         async () => {
@@ -44,6 +44,12 @@ async function main() {
         // async (safeTransactions, abi, contractManager) => {
         async () => {
             // initialize
+        },
+        async (safeMockAddress, abi) => {
+            const marionette = await getMarionette(abi);
+            const PUPPETEER_ROLE = await marionette.PUPPETEER_ROLE();
+            const encodedSetVersion = marionette.interface.encodeFunctionData("grantRole", [PUPPETEER_ROLE, safeMockAddress]);
+            await marionette.execute(marionette.address, 0, encodedSetVersion);
         }
     );
 }
