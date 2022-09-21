@@ -83,9 +83,9 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
         address sender,
         bytes calldata data
     )
-    external
-    override
-    returns (address)
+        external
+        override
+        returns (address)
     {
         require(hasRole(IMA_ROLE, msg.sender), "Sender is not IMA");
         require(hasRole(PUPPETEER_ROLE, sender), ACCESS_VIOLATION);
@@ -142,6 +142,12 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
     // private
 
     function _doCall(address payable target, uint value, bytes memory data) private returns (bytes memory) {
+        if (_getHashedSelector(data) == _multiSendHashed()) {
+            // slither-disable-next-line controlled-delegatecall,low-level-calls
+            (bool success, bytes memory result) = target.delegatecall(data);
+            require(success, "MultiSend failed");
+            return result;
+        }
 
         if (msg.value > 0) {
             emit EtherReceived(msg.sender, msg.value);
@@ -162,6 +168,18 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
             target.sendValue(value);
             return "0x";
         }
+    }
+
+    function _getHashedSelector(bytes memory data) private pure returns (bytes32) {
+        bytes memory selector = new bytes(4);
+        for (uint i = 0; i < 4; i++) {
+            selector[i] = data[i]; 
+        }
+        return keccak256(abi.encodePacked(selector));
+    }
+
+    function _multiSendHashed() private pure returns (bytes32) {
+        return keccak256(abi.encodePacked(bytes4(keccak256(bytes("multiSend(bytes)")))));
     }
 
     function _parseFunctionCall(bytes calldata data) private pure returns (FunctionCall memory functionCall) {
