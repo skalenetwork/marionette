@@ -1,4 +1,4 @@
-import { HardhatUserConfig } from "hardhat/config";
+import { HardhatUserConfig, subtask } from "hardhat/config";
 import "@openzeppelin/hardhat-upgrades";
 import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-etherscan";
@@ -7,6 +7,8 @@ import "@typechain/hardhat";
 import "solidity-coverage";
 import { utils, Wallet } from "ethers";
 import { HardhatNetworkAccountUserConfig } from "hardhat/types/config";
+import path from "path";
+import { TASK_COMPILE_SOLIDITY_GET_SOURCE_PATHS } from "hardhat/builtin-tasks/task-names";
 
 function getAccounts() {
   const accounts: HardhatNetworkAccountUserConfig[] = [];
@@ -46,6 +48,20 @@ function getGasPrice(gasPrice: string | undefined) {
     return "auto";
   }
 }
+
+subtask(
+  TASK_COMPILE_SOLIDITY_GET_SOURCE_PATHS,
+  async (_, { config }, runSuper) => {
+    const paths = await runSuper() as Array<string>;
+
+    return paths
+      .filter((solidityFilePath: string) => {
+        const relativePath = path.relative(config.paths.sources, solidityFilePath)
+
+        return relativePath !== "test/MarionetteOld.sol";
+      })
+  }
+);
 
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
