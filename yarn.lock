@@ -946,10 +946,17 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
   integrity sha512-9NET910DNaIPngYnLLPeg+Ogzqsi9uM4mSboU5y6p8S5DzMTVEsJZrawi+BoDNUVBa2DhJqQYUFvMDfgU062LQ==
 
-"@skalenetwork/ima-interfaces@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@skalenetwork/ima-interfaces/-/ima-interfaces-0.0.1.tgz#ed9645e004f671d03111b698faf1a90b2afdb7d0"
-  integrity sha512-naLB8ZqyTZmRwayahx4wIuW9oCgB5/VI3XJhAoBXqBgVDuZU1p270kJSqT4eyh+MUttIBtnSzorzSbPteFs6AQ==
+"@skalenetwork/ima-interfaces@^1.0.0-stable.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@skalenetwork/ima-interfaces/-/ima-interfaces-1.0.0.tgz#d642c4fc424813837f13854d05bae7092c456184"
+  integrity sha512-daHzdHk10szph/Lwcb+p8w7Z5iouvqNsODRX048SLSVGAQYtmr6nw+/Y+H70gx29tBV2+TZUCAPt/4gi8/eITA==
+  dependencies:
+    "@skalenetwork/skale-manager-interfaces" "^0.1.2"
+
+"@skalenetwork/skale-manager-interfaces@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@skalenetwork/skale-manager-interfaces/-/skale-manager-interfaces-0.1.2.tgz#88e543c8cc298cd0cc9559892d746d2d74786da8"
+  integrity sha512-gapSQJahwWMlTB/xp/kMzB6k+9+Skx/N0fvEloiW4CUrkGkSa8+fj16YmUXX45p1hOc45W+JydiJPNgZtx32Dg==
 
 "@skalenetwork/upgrade-tools@1.0.0-optional-contract-manager.14":
   version "1.0.0-optional-contract-manager.14"

@@ -40,10 +40,7 @@ contract ImaMock is IImaMock {
         IMessageReceiver to,
         bytes calldata message
     ) external override {
-        require(
-            to.postMessage("D2 schain", from, message) == address(0),
-            "postMessage call failed"
-        );
+        to.postMessage("D2 schain", from, message);
     }
 
     function postOutgoingMessage(

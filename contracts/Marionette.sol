@@ -86,7 +86,6 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
     )
         external
         override
-        returns (address)
     {
         require(hasRole(IMA_ROLE, msg.sender), "Sender is not IMA");
         require(hasRole(PUPPETEER_ROLE, sender), ACCESS_VIOLATION);
@@ -95,8 +94,6 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
 
         bytes memory output = _doCall(payable(functionCall.receiver), functionCall.value, functionCall.data);        
         emit FunctionCallResult(output);
-
-        return address(0);
     }
 
     function execute(
