@@ -25,12 +25,17 @@ git clone --branch $DEPLOYED_TAG https://github.com/$GITHUB_REPOSITORY.git $DEPL
 
 npx ganache-cli --gasLimit 8000000 --quiet &
 
+result=$(npx hardhat run scripts/deployImaMock.ts --network localhost)
+IMA_MOCK_ADDRESS=${result#*"IMA "}
+
 cd $DEPLOYED_DIR
 nvm install $DEPLOYED_WITH_NODE_VERSION
 nvm use $DEPLOYED_WITH_NODE_VERSION
 yarn install
 
-VERSION=$DEPLOYED_VERSION npx hardhat run migrations/deploy.ts --network localhost
+cp $GITHUB_WORKSPACE/contracts/test/MarionetteOld.sol contracts/Marionette.sol
+cp $GITHUB_WORKSPACE/migrations/deploy.ts migrations/deploy.ts
+VERSION=$DEPLOYED_VERSION IMA_ADDRESS=$IMA_MOCK_ADDRESS npx hardhat run migrations/deploy.ts --network localhost
 rm $GITHUB_WORKSPACE/.openzeppelin/unknown-*.json || true
 cp .openzeppelin/unknown-*.json $GITHUB_WORKSPACE/.openzeppelin
 ABI_FILENAME="marionette-$DEPLOYED_VERSION-localhost-abi-and-addresses.json"
@@ -39,6 +44,6 @@ cp "data/$ABI_FILENAME" "$GITHUB_WORKSPACE/data"
 cd $GITHUB_WORKSPACE
 rm -r --interactive=never $DEPLOYED_DIR
 
-ABI="data/$ABI_FILENAME" npx hardhat run migrations/upgrade.ts --network localhost
+ABI="data/$ABI_FILENAME" SKALE_CHAIN_NAME="Bob" MESSAGE_PROXY_FOR_MAINNET_ADDRESS=$IMA_MOCK_ADDRESS npx hardhat run migrations/upgrade.ts --network localhost
 
 npx kill-port 8545
