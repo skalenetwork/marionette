@@ -30,6 +30,7 @@ interface IMarionette is IMessageReceiver {
     function execute(address payable target, uint value, bytes calldata data) external payable returns (bytes memory);
     function sendEth(address payable target, uint value) external payable;
     function setVersion(string calldata newVersion) external;
+    function sendSFuel(address payable target, uint value) external payable;
     function encodeFunctionCall(
         address receiver,
         uint value,

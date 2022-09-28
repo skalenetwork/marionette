@@ -33,7 +33,7 @@ describe("Marionette", () => {
 
         it ("should be able to send ETH to address", async () => {
             const balanceBefore = await ethers.provider.getBalance(external.address);
-            await marionette.sendEth(external.address, amount, {value: amount})
+            await marionette.sendSFuel(external.address, amount, {value: amount})
                 .should.emit(marionette, "EtherSent")
                 .withArgs(external.address, amount)
                 .emit(marionette, "EtherReceived")
@@ -45,18 +45,18 @@ describe("Marionette", () => {
 
         it ("should be able to send ETH to contract", async () => {
             const balanceBefore = await ethers.provider.getBalance(target.address);
-            await marionette.sendEth(target.address, amount, {value: amount})
+            await marionette.sendSFuel(target.address, amount, {value: amount})
                 .should.emit(marionette, "EtherSent")
                 .withArgs(target.address, amount)
                 .emit(marionette, "EtherReceived")
                 .withArgs(owner.address, amount);
             const balanceAfter = await ethers.provider.getBalance(target.address);
             balanceAfter.sub(balanceBefore).should.be.equal(amount);
-            await target.sendEth(owner.address, amount);
+            await target.sendSFuel(owner.address, amount);
         });
 
         it ("should not allow everyone to send ETH", async () => {
-            await marionette.connect(hacker).sendEth(target.address, amount, {value: amount})
+            await marionette.connect(hacker).sendSFuel(target.address, amount, {value: amount})
                 .should.be.eventually.rejectedWith("Access violation");
         });
 
@@ -101,7 +101,7 @@ describe("Marionette", () => {
             await transaction.should.emit(target, "ExecutionResult").withArgs(uintValue, stringValue);
             await transaction.should.emit(target, "EtherReceived").withArgs(marionette.address, amount);
 
-            await target.sendEth(owner.address, amount);
+            await target.sendSFuel(owner.address, amount);
         });
 
         it ("should not allow everyone to call contract", async () => {
