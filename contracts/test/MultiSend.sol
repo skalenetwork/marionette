@@ -24,6 +24,7 @@ pragma solidity 0.8.11;
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 // AccessControlEnumerableUpgradeable is needed to generate type
 import "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
+import "hardhat/console.sol";
 
 interface IMultiSend {
     enum Operation {Call, DelegateCall}
@@ -33,10 +34,13 @@ interface IMultiSend {
 
 contract MultiSend is OwnableUpgradeable, IMultiSend {
 
-    constructor() initializer {
+    constructor(address newMarionetteAddress) initializer {
         OwnableUpgradeable.__Ownable_init();
-        multiSend(""); // this is needed to remove slither warning
+        marionetteAddress = newMarionetteAddress;
     }
+
+    address public marionetteAddress;
+    address public constant MARIONETTE_PREDEPLOYED = address(0xD2c0DeFACe000000000000000000000000000000);
 
     /// @dev Sends multiple transactions and reverts all if one fails.
     /// @param transactions Encoded transactions. Each transaction is encoded as a packed bytes of
@@ -51,6 +55,11 @@ contract MultiSend is OwnableUpgradeable, IMultiSend {
         override
     {
         // solhint-disable-next-line no-inline-assembly
+        require(
+            msg.sender == MARIONETTE_PREDEPLOYED ||
+            msg.sender == marionetteAddress,
+            "Permission denied"
+        );
         assembly {
             let length := mload(transactions)
             let i := 0x20
