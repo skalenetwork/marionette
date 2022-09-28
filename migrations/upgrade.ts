@@ -4,7 +4,7 @@ import { promises as fs } from "fs";
 import { artifacts, ethers, network, upgrades } from "hardhat";
 import hre from "hardhat";
 import { getImplementationAddress, hashBytecode } from "@openzeppelin/upgrades-core";
-import { Contract, ContractFactory } from "ethers";
+import { Contract } from "ethers";
 import chalk from "chalk";
 import { getManifestAdmin } from "@openzeppelin/hardhat-upgrades/dist/admin";
 import { AccessControlUpgradeable, OwnableUpgradeable, ProxyAdmin, SafeMock } from "@skalenetwork/upgrade-tools/dist/typechain-types";
@@ -78,18 +78,6 @@ export async function getContractFactoryAndUpdateManifest(contract: string) {
     Object.assign(libraries, oldLibraries);
     await fs.writeFile(await getManifestFile(), JSON.stringify(manifest, null, 4));
     return await getLinkedContractFactory(contract, libraries);
-}
-
-function getContractNameForAbi(contractName: string, abi: SkaleABIFile) {
-    let _contract = contractName;
-    if (!abi[getContractKeyInAbiFile(contractName) + "_address"]) {
-        if (contractName === "BountyV2") {
-            _contract = "Bounty";
-        } else if (contractName === "EtherbaseUpgradeable") {
-            _contract = "Etherbase"
-        }
-    }
-    return _contract;
 }
 
 type DeploymentAction<ContractManagerType extends Contract> = (safeTransactions: string[], abi: SkaleABIFile, contractManager: ContractManagerType | undefined) => Promise<string[]>;
@@ -189,7 +177,7 @@ export async function upgrade<ContractManagerType extends OwnableUpgradeable>(
     const contractsToUpgrade: {proxyAddress: string, implementationAddress: string, name: string, abi: []}[] = [];
     for (const contract of contractNamesToUpgrade) {
         const contractFactory = await getContractFactoryAndUpdateManifest(contract);
-        const contractName = getContractNameForAbi(contract, abi);
+        const contractName = contract;
         const proxyAddress = abi[getContractKeyInAbiFile(contractName) + "_address"] as string;
 
         console.log(`Prepare upgrade of ${contract}`);
@@ -401,7 +389,7 @@ async function main() {
                 process.exit(1);
             }
 
-            let transactionsBatches: string[][] = [[]];
+            const transactionsBatches: string[][] = [[]];
 
             safeTransactions.push(encodeTransaction(
                 0,

@@ -152,6 +152,7 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
             if (data.length >= 4) {
                 if (_getHashedSelector(data) == _multiSendHashed()) {
                     // slither-disable-next-line controlled-delegatecall,low-level-calls
+                    // solhint-disable-next-line avoid-low-level-calls
                     (bool success, bytes memory result) = target.delegatecall(data);
                     require(success, "MultiSend failed");
                     return result;
