@@ -37,7 +37,7 @@ async function main() {
     
     console.log("Deploy Marionette");
     const marionetteUpgradeableFactory = await ethers.getContractFactory("Marionette");
-    const marionette = await upgrades.deployProxy(marionetteUpgradeableFactory, [ownerAddress, imaAddress], { unsafeAllow: ['delegatecall'] });
+    const marionette = await upgrades.deployProxy(marionetteUpgradeableFactory, [ownerAddress, imaAddress]);
     await marionette.deployTransaction.wait();
     const marionetteAddress = marionette.address;
     const marionetteInterface = marionette.interface;

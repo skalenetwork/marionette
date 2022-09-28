@@ -33,8 +33,6 @@ nvm install $DEPLOYED_WITH_NODE_VERSION
 nvm use $DEPLOYED_WITH_NODE_VERSION
 yarn install
 
-cp $GITHUB_WORKSPACE/contracts/test/MarionetteOld.sol contracts/Marionette.sol
-cp $GITHUB_WORKSPACE/migrations/deploy.ts migrations/deploy.ts
 VERSION=$DEPLOYED_VERSION IMA_ADDRESS=$IMA_MOCK_ADDRESS npx hardhat run migrations/deploy.ts --network localhost
 rm $GITHUB_WORKSPACE/.openzeppelin/unknown-*.json || true
 cp .openzeppelin/unknown-*.json $GITHUB_WORKSPACE/.openzeppelin
