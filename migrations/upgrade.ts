@@ -90,8 +90,6 @@ async function main() {
                 encodedData
             ));
 
-
-            // 2.1. transferOwnership from Marionette to MultiSend (for upgrade permissions)
             safeTransactions.unshift(encodeTransaction(
                 0,
                 marionette.address,
@@ -149,6 +147,7 @@ async function main() {
                 ]
             );
 
+            // 2.1. transferOwnership from Marionette to MultiSend (for upgrade permissions)
             // 2.2. upgrade Marionette
             // 2.3. setVersion
             // 2.4. revoke PUPPETEER_ROLE from MultiSend
