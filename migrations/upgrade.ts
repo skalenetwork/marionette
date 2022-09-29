@@ -90,25 +90,20 @@ async function main() {
                 encodedData
             ));
 
-            encodedData = imaMockFactory.interface.encodeFunctionData(
-                "postOutgoingMessage",
-                [
-                    schainHash,
-                    marionette.address,
-                    ethers.utils.defaultAbiCoder.encode(["address", "uint", "bytes"], [
+
+            // 2.1. transferOwnership from Marionette to MultiSend (for upgrade permissions)
+            safeTransactions.unshift(encodeTransaction(
+                0,
+                marionette.address,
+                0,
+                marionette.interface.encodeFunctionData(
+                    "execute", 
+                    [
                         proxyAdmin.address,
                         0,
                         proxyAdmin.interface.encodeFunctionData("transferOwnership", [multiSend.address])
-                    ])
-                ]
-            );
-
-            // 2. transferOwnership from Marionette to MultiSend (for upgrade permissions)
-            _safeTransactions.push(encodeTransaction(
-                0,
-                messageProxyForMainnetAddress,
-                0,
-                encodedData
+                    ]
+                )
             ));
 
             safeTransactions.push(encodeTransaction(
@@ -154,12 +149,12 @@ async function main() {
                 ]
             );
 
-            // 3.1. upgrade Marionette
-            // 3.2. setVersion
-            // 3.3. revoke PUPPETEER_ROLE from MultiSend
-            // 3.4. transferOwnership from MultiSend to Marionette
+            // 2.2. upgrade Marionette
+            // 2.3. setVersion
+            // 2.4. revoke PUPPETEER_ROLE from MultiSend
+            // 2.5. transferOwnership from MultiSend to Marionette
             // or
-            // 3.5. transferOwnership from Marionette to SafeMock
+            // 2.6. transferOwnership from Marionette to SafeMock
             _safeTransactions.push(encodeTransaction(
                 0,
                 messageProxyForMainnetAddress,
