@@ -958,10 +958,10 @@
   resolved "https://registry.yarnpkg.com/@skalenetwork/skale-manager-interfaces/-/skale-manager-interfaces-0.1.2.tgz#88e543c8cc298cd0cc9559892d746d2d74786da8"
   integrity sha512-gapSQJahwWMlTB/xp/kMzB6k+9+Skx/N0fvEloiW4CUrkGkSa8+fj16YmUXX45p1hOc45W+JydiJPNgZtx32Dg==
 
-"@skalenetwork/upgrade-tools@1.0.0-optional-contract-manager.15":
-  version "1.0.0-optional-contract-manager.15"
-  resolved "https://registry.yarnpkg.com/@skalenetwork/upgrade-tools/-/upgrade-tools-1.0.0-optional-contract-manager.15.tgz#f2e00fe9b04a64b27041fa7092194a46b5d02c48"
-  integrity sha512-XdAegjO5Xz8kQOI1LXWgcNLWB28hTeQwQoBT6iQcs6i1jf718NR6OEwRxKCDuIwgkN7JkiMFWxEnzCfp3rPuZQ==
+"@skalenetwork/upgrade-tools@^2.0.0-refactor.14":
+  version "2.0.0-refactor.14"
+  resolved "https://registry.yarnpkg.com/@skalenetwork/upgrade-tools/-/upgrade-tools-2.0.0-refactor.14.tgz#93c6856f02e5cfcdacf076c67d8cb30cbc6d1fa4"
+  integrity sha512-AvD5teBPf6UjCCHOVKwV7FciE9QKni7hJxaWrODvzywD820Tc7gy4scZi/aiYdhmxsuYZZdeNwB1+OgzK3Yy/g==
   dependencies:
     "@openzeppelin/contracts-upgradeable" "^4.4.2"
     axios "^0.27.2"
