@@ -1,5 +1,7 @@
 import { ethers } from "hardhat";
 import { Upgrader } from "@skalenetwork/upgrade-tools";
+import { SkaleABIFile } from "@skalenetwork/upgrade-tools/dist/src/types/SkaleABIFile";
+import { promises as fs } from "fs";
 
 const marionette_address = "0xD2c0DeFACe000000000000000000000000000000";
 
@@ -24,12 +26,21 @@ class MarionetteUpgrader extends Upgrader {
 
 async function main() {
 
+    let abi: SkaleABIFile;
+    if (process.env.ABI) {
+        // a file with marionette address is provided
+        abi = JSON.parse(await fs.readFile(process.env.ABI, "utf-8")) as SkaleABIFile;
+    } else {
+        // use default one
+        abi = {
+            "marionette_address": marionette_address
+        }
+    }
+
     const upgrader = new MarionetteUpgrader(
         "Marionette",
         "1.0.0",
-        {
-            "marionette_address": marionette_address
-        },
+        abi,
         ["Marionette"]
     );
 
