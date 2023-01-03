@@ -5,22 +5,22 @@ import { promises as fs } from "fs";
 
 const marionette_address = "0xD2c0DeFACe000000000000000000000000000000";
 
-async function getMarionette() {
-    return await ethers.getContractAt("Marionette", marionette_address);
-}
-
 class MarionetteUpgrader extends Upgrader {
 
     getDeployedVersion = async () => {
-        return await (await getMarionette()).version();
+        return await (await this.getMarionette()).version();
     };
 
     setVersion = async (newVersion: string) => {
-        const marionette = await getMarionette();
+        const marionette = await this.getMarionette();
         this.transactions.push({
             to: marionette.address,
             data: marionette.interface.encodeFunctionData("setVersion", [newVersion])
         });
+    }
+
+    async getMarionette() {
+        return await ethers.getContractAt("Marionette", this.abi["marionette_address"] as string);
     }
 }
 
