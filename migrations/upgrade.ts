@@ -1,7 +1,7 @@
 import { ethers } from "hardhat";
 import { Upgrader } from "@skalenetwork/upgrade-tools";
 import { SkaleABIFile } from "@skalenetwork/upgrade-tools/dist/src/types/SkaleABIFile";
-import { promises as fs } from "fs";
+import { promises as fs, existsSync } from "fs";
 import { getManifestAdmin } from "@openzeppelin/hardhat-upgrades/dist/admin";
 import { ProxyAdmin } from "@skalenetwork/upgrade-tools/dist/typechain-types";
 import hre from "hardhat";
@@ -58,7 +58,11 @@ async function main() {
     const { chainId } = await hre.ethers.provider.getNetwork();
     const originManifestFileName = __dirname + "/../.openzeppelin/predeployed.json";
     const targetManifestFileName = __dirname + `/../.openzeppelin/unknown-${chainId}.json`;
-    await fs.copyFile(originManifestFileName, targetManifestFileName);
+
+    if (!existsSync(targetManifestFileName)) {
+        console.log("Create a manifest file based on predeployed template");
+        await fs.copyFile(originManifestFileName, targetManifestFileName);
+    }
 
 
     let abi: SkaleABIFile;
