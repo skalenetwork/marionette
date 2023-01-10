@@ -26,32 +26,10 @@ import "@skalenetwork/ima-interfaces/IMessageReceiver.sol";
 
 interface IImaMock {
     function sendMessage(address from, IMessageReceiver to, bytes calldata message) external;
-    function postOutgoingMessage(
-        bytes32 targetChainHash,
-        address targetContract,
-        bytes memory data
-    ) external;
 }
 
 contract ImaMock is IImaMock {
-
-    function sendMessage(
-        address from,
-        IMessageReceiver to,
-        bytes calldata message
-    ) external override {
+    function sendMessage(address from, IMessageReceiver to, bytes calldata message) external override {
         to.postMessage("D2 schain", from, message);
-    }
-
-    function postOutgoingMessage(
-        bytes32 targetChainHash,
-        address targetContract,
-        bytes memory data
-    ) external override {
-        IMessageReceiver(targetContract).postMessage(
-            targetChainHash,
-            msg.sender,
-            data
-        );
     }
 }
