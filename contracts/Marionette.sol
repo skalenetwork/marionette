@@ -63,7 +63,6 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
         emit EtherReceived(msg.sender, msg.value);
     }
 
-    // slither-disable-next-line unprotected-upgrade
     function initialize(address owner, address ima) external override initializer {
         AccessControlEnumerableUpgradeable.__AccessControlEnumerable_init();
         AccessControlUpgradeable._setupRole(DEFAULT_ADMIN_ROLE, address(this));
