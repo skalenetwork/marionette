@@ -54,6 +54,13 @@ class MarionetteUpgrader extends Upgrader {
 
 async function main() {
 
+    // prepare the manifest
+    const { chainId } = await hre.ethers.provider.getNetwork();
+    const originManifestFileName = __dirname + "/../.openzeppelin/predeployed.json";
+    const targetManifestFileName = __dirname + `/../.openzeppelin/unknown-${chainId}.json`;
+    await fs.copyFile(originManifestFileName, targetManifestFileName);
+
+
     let abi: SkaleABIFile;
     if (process.env.ABI) {
         // a file with marionette address is provided
