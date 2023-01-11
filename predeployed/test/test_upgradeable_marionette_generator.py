@@ -85,4 +85,4 @@ class TestUpgradeableMarionetteGenerator(TestSolidityProject):
 
             marionette = w3.eth.contract(address=MARIONETTE_ADDRESS, abi=self.get_marionette_abi())
 
-            assert marionette.functions.version().call() == get_distribution('ima_predeployed').version
+            assert marionette.functions.version().call() == get_distribution('marionette_predeployed').version
