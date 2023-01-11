@@ -107,7 +107,7 @@ describe("Marionette", () => {
         it ("should allow owner to do multiple calls to a contract", async () => {
             const call1 = {
                 receiver: target.address,
-                value: 0,
+                value: 1,
                 data: target.interface.encodeFunctionData(
                     "targetFunction",
                     [1, "call1"]
@@ -115,14 +115,17 @@ describe("Marionette", () => {
             };
             const call2 = {
                 receiver: target.address,
-                value: 0,
+                value: 2,
                 data: target.interface.encodeFunctionData(
                     "targetFunction",
                     [2, "call2"]
                 )
             };
 
-            const transaction = await marionette.executeMultiple([call1, call2]);
+            const transaction = await marionette.executeMultiple([call1, call2], {value: 3});
+            await transaction.should.emit(marionette, "EtherReceived").withArgs(owner.address, 3);
+            await transaction.should.emit(marionette, "EtherSent").withArgs(target.address, 1);
+            await transaction.should.emit(marionette, "EtherSent").withArgs(target.address, 2);
             await transaction.should.emit(target, "ExecutionResult").withArgs(1, "call1");
             await transaction.should.emit(target, "ExecutionResult").withArgs(2, "call2");
         });
