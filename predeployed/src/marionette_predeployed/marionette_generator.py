@@ -1,8 +1,8 @@
 '''Module for generation of predeployed Marionette smart contract'''
 
 from os.path import dirname, join
-from pkg_resources import get_distribution
 from typing import Dict
+from pkg_resources import get_distribution
 from web3.auto import w3
 
 from predeployed_generator.openzeppelin.access_control_enumerable_generator \
