@@ -83,6 +83,9 @@ class MarionetteGenerator(AccessControlEnumerableGenerator):
         cls._setup_role(storage, roles_slots, cls.DEFAULT_ADMIN_ROLE, [marionette])
         cls._setup_role(storage, roles_slots, cls.IMA_ROLE, [ima])
         cls._setup_role(storage, roles_slots, cls.PUPPETEER_ROLE, [owner, schain_owner])
-        cls._write_string(storage, cls.VERSION_SLOT, get_distribution('marionette_predeployed').version)
+        cls._write_string(
+            storage,
+            cls.VERSION_SLOT,
+            get_distribution('marionette_predeployed').version)
 
         return storage
