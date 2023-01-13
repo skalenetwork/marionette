@@ -5,10 +5,13 @@ import "@nomiclabs/hardhat-etherscan";
 import "@nomicfoundation/hardhat-chai-matchers";
 import "@typechain/hardhat";
 import "solidity-coverage";
+import * as dotenv from "dotenv"
 import { utils, Wallet } from "ethers";
 import { HardhatNetworkAccountUserConfig } from "hardhat/types/config";
 import path from "path";
 import { TASK_COMPILE_SOLIDITY_GET_SOURCE_PATHS } from "hardhat/builtin-tasks/task-names";
+
+dotenv.config();
 
 function getAccounts() {
   const accounts: HardhatNetworkAccountUserConfig[] = [];
