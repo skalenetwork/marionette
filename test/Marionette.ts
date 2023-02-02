@@ -1,6 +1,7 @@
 import { ethers  } from "hardhat";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import * as chai from "chai"
+import { expect } from "chai";
 import chaiAsPromised from "chai-as-promised";
 import { Marionette, Target, ImaMock } from "../typechain-types";
 
@@ -32,7 +33,7 @@ describe("Marionette", () => {
 
         it ("should be able to send ETH to address", async () => {
             const balanceBefore = await ethers.provider.getBalance(external.address);
-            await marionette.sendEth(external.address, amount, {value: amount})
+            await marionette.sendSFuel(external.address, amount, {value: amount})
                 .should.emit(marionette, "EtherSent")
                 .withArgs(external.address, amount)
                 .emit(marionette, "EtherReceived")
@@ -44,18 +45,18 @@ describe("Marionette", () => {
 
         it ("should be able to send ETH to contract", async () => {
             const balanceBefore = await ethers.provider.getBalance(target.address);
-            await marionette.sendEth(target.address, amount, {value: amount})
+            await marionette.sendSFuel(target.address, amount, {value: amount})
                 .should.emit(marionette, "EtherSent")
                 .withArgs(target.address, amount)
                 .emit(marionette, "EtherReceived")
                 .withArgs(owner.address, amount);
             const balanceAfter = await ethers.provider.getBalance(target.address);
             balanceAfter.sub(balanceBefore).should.be.equal(amount);
-            await target.sendEth(owner.address, amount);
+            await target.sendSFuel(owner.address, amount);
         });
 
         it ("should not allow everyone to send ETH", async () => {
-            await marionette.connect(hacker).sendEth(target.address, amount, {value: amount})
+            await marionette.connect(hacker).sendSFuel(target.address, amount, {value: amount})
                 .should.be.eventually.rejectedWith("Access violation");
         });
 
@@ -100,12 +101,29 @@ describe("Marionette", () => {
             await transaction.should.emit(target, "ExecutionResult").withArgs(uintValue, stringValue);
             await transaction.should.emit(target, "EtherReceived").withArgs(marionette.address, amount);
 
-            await target.sendEth(owner.address, amount);
+            await target.sendSFuel(owner.address, amount);
         });
 
         it ("should not allow everyone to call contract", async () => {
             await marionette.connect(hacker).execute(target.address, 0, "0x")
                 .should.be.eventually.rejectedWith("Access violation");
+        });
+
+        it("should allow owner to set a version", async () => {
+            await expect(marionette.connect(hacker).setVersion("bad")).to.be.revertedWithCustomError(
+                marionette,
+                "Unauthorized"
+              );
+
+            await marionette.execute(
+                marionette.address,
+                0,
+                marionette.interface.encodeFunctionData(
+                    "setVersion",
+                    ["nice"]
+                )
+            );
+            (await marionette.version()).should.be.equal("nice");
         });
 
         describe("Calls from IMA", () => {

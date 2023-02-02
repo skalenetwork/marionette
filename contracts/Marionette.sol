@@ -42,6 +42,8 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
     bytes32 public constant PUPPETEER_ROLE = keccak256("PUPPETEER_ROLE");
     string public constant ACCESS_VIOLATION = "Access violation";
 
+    string public version;
+
     event EtherReceived(
         address sender,
         uint amount
@@ -55,6 +57,13 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
     event FunctionCallResult (
         bytes output
     );
+
+    event VersionUpdated(
+        string oldVersion,
+        string newVersion
+    );
+
+    error Unauthorized(address unauthorizedSender);
 
     receive() external payable override {
         emit EtherReceived(msg.sender, msg.value);
@@ -76,17 +85,14 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
     )
     external
     override
-    returns (address)
     {
         require(hasRole(IMA_ROLE, msg.sender), "Sender is not IMA");
         require(hasRole(PUPPETEER_ROLE, sender), ACCESS_VIOLATION);
 
         FunctionCall memory functionCall = _parseFunctionCall(data);
 
-        bytes memory output = _doCall(payable(functionCall.receiver), functionCall.value, functionCall.data);        
+        bytes memory output = _doCall(payable(functionCall.receiver), functionCall.value, functionCall.data);
         emit FunctionCallResult(output);
-
-        return address(0);
     }
 
     function execute(
@@ -104,10 +110,17 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
         return _doCall(target, value, data);
     }
 
-    function sendEth(address payable target, uint value) external payable override {
+    function sendSFuel(address payable target, uint value) external payable override {
         require(hasRole(PUPPETEER_ROLE, msg.sender), ACCESS_VIOLATION);
 
         _doCall(target, value, "0x");
+    }
+
+    function setVersion(string calldata newVersion) external override {
+        if (!hasRole(DEFAULT_ADMIN_ROLE, msg.sender))
+            revert Unauthorized(msg.sender);
+        emit VersionUpdated(version, newVersion);
+        version = newVersion;
     }
 
     function encodeFunctionCall(
@@ -141,7 +154,7 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
             } else {
                 target.sendValue(value);
                 return "0x";
-            }                        
+            }
         } else {
             target.sendValue(value);
             return "0x";

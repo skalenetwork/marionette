@@ -1,7 +1,8 @@
-'''Module for generaration of predeployed Marionette smart contract'''
+'''Module for generation of predeployed Marionette smart contract'''
 
 from os.path import dirname, join
 from typing import Dict
+from pkg_resources import get_distribution
 from web3.auto import w3
 
 from predeployed_generator.openzeppelin.access_control_enumerable_generator \
@@ -13,6 +14,7 @@ class MarionetteGenerator(AccessControlEnumerableGenerator):
     '''
 
     ARTIFACT_FILENAME = 'Marionette.json'
+    META_FILENAME = 'Marionette.meta.json'
     DEFAULT_ADMIN_ROLE = (0).to_bytes(32, 'big')
     IMA_ROLE = w3.solidityKeccak(['string'], ['IMA_ROLE'])
     PUPPETEER_ROLE = w3.solidityKeccak(['string'], ['PUPPETEER_ROLE'])
@@ -39,18 +41,19 @@ class MarionetteGenerator(AccessControlEnumerableGenerator):
     # ...   __gap
     # 200:  __gap
     # --------- Marionette ---------
+    # 201: version
 
 
     INITIALIZED_SLOT = 0
     ROLES_SLOT = 101
     ROLE_MEMBERS_SLOT = 151
+    VERSION_SLOT = 201
 
     def __init__(self):
-        generator = MarionetteGenerator.from_hardhat_artifact(join(
-            dirname(__file__),
-            'artifacts',
-            self.ARTIFACT_FILENAME))
-        super().__init__(bytecode=generator.bytecode, abi=generator.abi)
+        generator = MarionetteGenerator.from_hardhat_artifact(
+            join(dirname(__file__), 'artifacts', self.ARTIFACT_FILENAME),
+            join(dirname(__file__), 'artifacts', self.META_FILENAME))
+        super().__init__(bytecode=generator.bytecode, abi=generator.abi, meta=generator.meta)
 
     @classmethod
     def generate_storage(cls, **kwargs) -> Dict[str, str]:
@@ -80,5 +83,9 @@ class MarionetteGenerator(AccessControlEnumerableGenerator):
         cls._setup_role(storage, roles_slots, cls.DEFAULT_ADMIN_ROLE, [marionette])
         cls._setup_role(storage, roles_slots, cls.IMA_ROLE, [ima])
         cls._setup_role(storage, roles_slots, cls.PUPPETEER_ROLE, [owner, schain_owner])
+        cls._write_string(
+            storage,
+            cls.VERSION_SLOT,
+            get_distribution('marionette_predeployed').version)
 
         return storage

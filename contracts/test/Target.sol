@@ -27,9 +27,9 @@ import "@skalenetwork/ima-interfaces/IMessageReceiver.sol";
 
 interface ITarget {
     receive() external payable;
-    function sendEth(address payable receiver, uint value) external;
+    function sendSFuel(address payable receiver, uint value) external;
     function sendMessage(address from, IMessageReceiver receiver, bytes calldata message) external;
-    function targetFunction(uint number, string calldata line) external payable;    
+    function targetFunction(uint number, string calldata line) external payable;
 }
 
 contract Target is ITarget {
@@ -57,10 +57,10 @@ contract Target is ITarget {
     }
 
     function sendMessage(address from, IMessageReceiver receiver, bytes calldata message) external override {
-        require(receiver.postMessage("D2 schain", from, message) == address(0), "postMessage call failed");
+        receiver.postMessage("D2 schain", from, message);
     }
 
-    function sendEth(address payable receiver, uint value) external override {
+    function sendSFuel(address payable receiver, uint value) external override {
         receiver.sendValue(value);
     }
 }

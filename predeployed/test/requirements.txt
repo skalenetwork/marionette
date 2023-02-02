@@ -1,5 +1,6 @@
 mypy
-predeployed-generator
+predeployed-generator >= 1.1.0a1
 pylint
 pytest
 pytest-cov
+types-setuptools

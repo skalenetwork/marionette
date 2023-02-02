@@ -1,3 +1,4 @@
+from pkg_resources import get_distribution
 from web3.auto import w3
 from predeployed_generator.openzeppelin.proxy_admin_generator import ProxyAdminGenerator
 
@@ -70,4 +71,18 @@ class TestUpgradeableMarionetteGenerator(TestSolidityProject):
             assert marionette.functions.hasRole(MarionetteGenerator.PUPPETEER_ROLE, self.OWNER_ADDRESS).call()
             assert marionette.functions.getRoleMember(MarionetteGenerator.PUPPETEER_ROLE, 1).call() == self.SCHAIN_OWNER_ADDRESS
             assert marionette.functions.hasRole(MarionetteGenerator.PUPPETEER_ROLE, self.SCHAIN_OWNER_ADDRESS).call()
-    
+
+    def test_meta_info(self):
+        meta = MarionetteGenerator().get_meta()
+        assert meta['name'] == 'Marionette'
+
+    def test_version(self, tmpdir):
+        self.datadir = tmpdir
+        genesis = self.prepare_genesis()
+
+        with self.run_geth(tmpdir, genesis):
+            assert w3.isConnected()
+
+            marionette = w3.eth.contract(address=MARIONETTE_ADDRESS, abi=self.get_marionette_abi())
+
+            assert marionette.functions.version().call() == get_distribution('marionette_predeployed').version
