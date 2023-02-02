@@ -1,4 +1,4 @@
-'''Module for generaration of Marionette predeployed smart contract'''
+'''Module for generation of Marionette predeployed smart contract'''
 
 from predeployed_generator.upgradeable_contract_generator import UpgradeableContractGenerator
 from marionette_predeployed.marionette_generator import MarionetteGenerator
