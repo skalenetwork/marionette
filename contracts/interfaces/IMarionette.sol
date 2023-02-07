@@ -25,28 +25,15 @@ import "@skalenetwork/ima-interfaces/IMessageReceiver.sol";
 
 
 interface IMarionette is IMessageReceiver {
-    struct FunctionCall {
-        address receiver;
-        uint value;
-        bytes data;
-    }
-
     receive() external payable;
     function initialize(address owner, address ima) external;
     function execute(address payable target, uint value, bytes calldata data) external payable returns (bytes memory);
-    function executeMultiple(FunctionCall[] calldata functionCalls) external payable returns (bytes[] memory);
     function setVersion(string calldata newVersion) external;
     function sendSFuel(address payable target, uint value) external payable;
     function encodeFunctionCall(
         address receiver,
         uint value,
         bytes calldata data
-    )
-        external
-        pure
-    returns (bytes memory);
-    function encodeFunctionCalls(
-        FunctionCall[] calldata functionCalls
     )
         external
         pure

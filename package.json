@@ -15,7 +15,7 @@
     "tsc": "npx tsc --noEmit",
     "eslint": "npx eslint --cache --ext .js,.jsx,.ts,.tsx .",
     "test": "yarn tsc && npx hardhat test",
-    "fullCheck": "yarn lint && yarn cspell && yarn tsc && yarn eslint && yarn slither",
+    "fullCheck": "yarn lint && yarn cspell && yarn slither && yarn tsc && yarn eslint",
     "hooks": "git config core.hooksPath .githooks || true",
     "no-hooks": "git config core.hooksPath .git/hooks"
   },

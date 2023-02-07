@@ -29,7 +29,7 @@ interface ITarget {
     receive() external payable;
     function sendSFuel(address payable receiver, uint value) external;
     function sendMessage(address from, IMessageReceiver receiver, bytes calldata message) external;
-    function targetFunction(uint number, string calldata line) external payable;    
+    function targetFunction(uint number, string calldata line) external payable;
 }
 
 contract Target is ITarget {
@@ -58,7 +58,6 @@ contract Target is ITarget {
 
     function sendMessage(address from, IMessageReceiver receiver, bytes calldata message) external override {
         receiver.postMessage("D2 schain", from, message);
-
     }
 
     function sendSFuel(address payable receiver, uint value) external override {

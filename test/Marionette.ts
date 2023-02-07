@@ -86,7 +86,7 @@ describe("Marionette", () => {
         const uintValue = 5;
         const stringValue = "Hello from D2";
 
-        it ("should allow owner to call a contract", async () => {
+        it ("should allow owner to call contract", async () => {
             const transaction = await marionette.execute(
                 target.address,
                 amount,
@@ -104,33 +104,7 @@ describe("Marionette", () => {
             await target.sendSFuel(owner.address, amount);
         });
 
-        it ("should allow owner to do multiple calls to a contract", async () => {
-            const call1 = {
-                receiver: target.address,
-                value: 1,
-                data: target.interface.encodeFunctionData(
-                    "targetFunction",
-                    [1, "call1"]
-                )
-            };
-            const call2 = {
-                receiver: target.address,
-                value: 2,
-                data: target.interface.encodeFunctionData(
-                    "targetFunction",
-                    [2, "call2"]
-                )
-            };
-
-            const transaction = await marionette.executeMultiple([call1, call2], {value: 3});
-            await transaction.should.emit(marionette, "EtherReceived").withArgs(owner.address, 3);
-            await transaction.should.emit(marionette, "EtherSent").withArgs(target.address, 1);
-            await transaction.should.emit(marionette, "EtherSent").withArgs(target.address, 2);
-            await transaction.should.emit(target, "ExecutionResult").withArgs(1, "call1");
-            await transaction.should.emit(target, "ExecutionResult").withArgs(2, "call2");
-        });
-
-        it ("should not allow everyone to call a contract", async () => {
+        it ("should not allow everyone to call contract", async () => {
             await marionette.connect(hacker).execute(target.address, 0, "0x")
                 .should.be.eventually.rejectedWith("Access violation");
         });
@@ -151,7 +125,6 @@ describe("Marionette", () => {
             );
             (await marionette.version()).should.be.equal("nice");
         });
-
 
         describe("Calls from IMA", () => {
 
