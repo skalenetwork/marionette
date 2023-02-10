@@ -43,7 +43,7 @@
     "hardhat": "^2.12.7",
     "kill-port": "^2.0.1",
     "lodash": "^4.17.21",
-    "solhint": "^3.3.7",
+    "solhint": "^3.3.8",
     "solidity-coverage": "^0.7.22",
     "ts-node": "^10.9.1",
     "typechain": "^7.0.1",
