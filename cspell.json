@@ -15,7 +15,9 @@
         "**/requirements.txt",
         "**/__pycache__/**",
         "**/*.egg-info/**",
-        "**/dist/**"
+        "**/dist/**",
+        "data/**",
+        "**/artifacts/**"
     ],
     "dictionaries": ["domain-terms", "libraries", "names", "skale-terms", "solidity"],
     "dictionaryDefinitions": [
