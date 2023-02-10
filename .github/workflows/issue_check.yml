@@ -3,6 +3,7 @@ on:
   pull_request:
     types: [ edited, synchronize, opened, reopened ]
     branches:
+      - '**'
       - '!dependabot/**'
 
 jobs:
