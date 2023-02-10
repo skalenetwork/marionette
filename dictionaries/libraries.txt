@@ -1,5 +1,7 @@
 codecov
+datadir
 ethersproject
+extradata
 initializable
 mypy
 nomiclabs
@@ -12,4 +14,3 @@ setuptools
 solhint
 typechain
 venv
-nomicfoundation
