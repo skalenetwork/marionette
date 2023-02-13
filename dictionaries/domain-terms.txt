@@ -2,3 +2,6 @@ alloc
 keccak256
 predeployed
 reentrancy
+datadir
+extradata
+realpath
