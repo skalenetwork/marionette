@@ -34,10 +34,10 @@ async function main() {
     if (imaAddress === ethers.constants.AddressZero) {
         console.log("IMA MessageProxy was not passed. Zero address will be used.");
     }
-    
+
     console.log("Deploy Marionette");
     const marionetteUpgradeableFactory = await ethers.getContractFactory("Marionette");
-    const marionette = (await upgrades.deployProxy(marionetteUpgradeableFactory, [ownerAddress, imaAddress]));
+    const marionette = await upgrades.deployProxy(marionetteUpgradeableFactory, [ownerAddress, imaAddress]);
     await marionette.deployTransaction.wait();
     const marionetteAddress = marionette.address;
     const marionetteInterface = marionette.interface;

@@ -1,10 +1,32 @@
-import { HardhatUserConfig } from "hardhat/config";
+import { HardhatUserConfig, subtask } from "hardhat/config";
 import "@openzeppelin/hardhat-upgrades";
 import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-etherscan";
 import "@nomicfoundation/hardhat-chai-matchers";
 import "@typechain/hardhat";
 import "solidity-coverage";
+import * as dotenv from "dotenv"
+import { utils, Wallet } from "ethers";
+import { HardhatNetworkAccountUserConfig } from "hardhat/types/config";
+import path from "path";
+import { TASK_COMPILE_SOLIDITY_GET_SOURCE_PATHS } from "hardhat/builtin-tasks/task-names";
+
+dotenv.config();
+
+function getAccounts() {
+  const accounts: HardhatNetworkAccountUserConfig[] = [];
+  const defaultBalance = utils.parseEther("2000000").toString();
+
+  const n = 10;
+  for (let i = 0; i < n; ++i) {
+    accounts.push({
+      privateKey: Wallet.createRandom().privateKey,
+      balance: defaultBalance
+    })
+  }
+
+  return accounts;
+}
 
 function getCustomUrl(url: string | undefined) {
   if (url) {
@@ -30,6 +52,20 @@ function getGasPrice(gasPrice: string | undefined) {
   }
 }
 
+subtask(
+  TASK_COMPILE_SOLIDITY_GET_SOURCE_PATHS,
+  async (_, { config }, runSuper) => {
+    const paths = await runSuper() as Array<string>;
+
+    return paths
+      .filter((solidityFilePath: string) => {
+        const relativePath = path.relative(config.paths.sources, solidityFilePath)
+
+        return relativePath !== "test/MarionetteOld.sol";
+      })
+  }
+);
+
 const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
   solidity: {
@@ -42,6 +78,10 @@ const config: HardhatUserConfig = {
     }
   },
   networks: {
+    hardhat: {
+      accounts: getAccounts(),
+      blockGasLimit: 12000000
+    },
     custom: {
       url: getCustomUrl(process.env.ENDPOINT),
       accounts: getCustomPrivateKey(process.env.PRIVATE_KEY),
