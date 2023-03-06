@@ -40,7 +40,7 @@
     "cspell": "^6.26.3",
     "eslint": "^8.34.0",
     "ethers": "^5.7.2",
-    "hardhat": "^2.12.7",
+    "hardhat": "^2.13.0",
     "kill-port": "^2.0.1",
     "lodash": "^4.17.21",
     "solhint": "^3.4.0",
