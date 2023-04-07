@@ -5,3 +5,4 @@ reentrancy
 datadir
 extradata
 realpath
+keccak
