@@ -3,7 +3,6 @@
 from os.path import dirname, join
 from typing import Dict
 from pkg_resources import get_distribution
-from web3.auto import w3
 
 from predeployed_generator.openzeppelin.access_control_enumerable_generator \
     import AccessControlEnumerableGenerator
@@ -16,8 +15,10 @@ class MarionetteGenerator(AccessControlEnumerableGenerator):
     ARTIFACT_FILENAME = 'Marionette.json'
     META_FILENAME = 'Marionette.meta.json'
     DEFAULT_ADMIN_ROLE = (0).to_bytes(32, 'big')
-    IMA_ROLE = w3.solidity_keccak(['string'], ['IMA_ROLE'])
-    PUPPETEER_ROLE = w3.solidity_keccak(['string'], ['PUPPETEER_ROLE'])
+    IMA_ROLE = AccessControlEnumerableGenerator.calculate_keccak(['string'], ['IMA_ROLE'])
+    PUPPETEER_ROLE = AccessControlEnumerableGenerator.calculate_keccak(
+        ['string'], ['PUPPETEER_ROLE']
+    )
 
     # --------------- storage ---------------
     # ------------ Initializable ------------
