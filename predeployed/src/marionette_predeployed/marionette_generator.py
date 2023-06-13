@@ -15,8 +15,8 @@ class MarionetteGenerator(AccessControlEnumerableGenerator):
     ARTIFACT_FILENAME = 'Marionette.json'
     META_FILENAME = 'Marionette.meta.json'
     DEFAULT_ADMIN_ROLE = (0).to_bytes(32, 'big')
-    IMA_ROLE = cls.calculate_keccak(['string'], ['IMA_ROLE'])
-    PUPPETEER_ROLE = cls.calculate_keccak(['string'], ['PUPPETEER_ROLE'])
+    IMA_ROLE = super().calculate_keccak(['string'], ['IMA_ROLE'])
+    PUPPETEER_ROLE = super().calculate_keccak(['string'], ['PUPPETEER_ROLE'])
 
     # --------------- storage ---------------
     # ------------ Initializable ------------
