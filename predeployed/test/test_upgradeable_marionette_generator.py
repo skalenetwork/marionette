@@ -38,7 +38,7 @@ class TestUpgradeableMarionetteGenerator(TestSolidityProject):
         genesis = self.prepare_genesis()
 
         with self.run_geth(tmpdir, genesis):
-            assert w3.isConnected()
+            assert w3.is_connected()
 
             marionette = w3.eth.contract(address=MARIONETTE_ADDRESS, abi=self.get_marionette_abi())
             assert marionette.functions.getRoleMemberCount(MarionetteGenerator.DEFAULT_ADMIN_ROLE).call() == 1
@@ -50,7 +50,7 @@ class TestUpgradeableMarionetteGenerator(TestSolidityProject):
         genesis = self.prepare_genesis()
 
         with self.run_geth(tmpdir, genesis):
-            assert w3.isConnected()
+            assert w3.is_connected()
 
             marionette = w3.eth.contract(address=MARIONETTE_ADDRESS, abi=self.get_marionette_abi())
             assert marionette.functions.getRoleMemberCount(MarionetteGenerator.IMA_ROLE).call() == 1
@@ -62,7 +62,7 @@ class TestUpgradeableMarionetteGenerator(TestSolidityProject):
         genesis = self.prepare_genesis()
 
         with self.run_geth(tmpdir, genesis):
-            assert w3.isConnected()
+            assert w3.is_connected()
 
             marionette = w3.eth.contract(address=MARIONETTE_ADDRESS, abi=self.get_marionette_abi())
 
@@ -81,7 +81,7 @@ class TestUpgradeableMarionetteGenerator(TestSolidityProject):
         genesis = self.prepare_genesis()
 
         with self.run_geth(tmpdir, genesis):
-            assert w3.isConnected()
+            assert w3.is_connected()
 
             marionette = w3.eth.contract(address=MARIONETTE_ADDRESS, abi=self.get_marionette_abi())
 
