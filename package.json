@@ -50,7 +50,7 @@
     "typescript": "^5.1.3"
   },
   "dependencies": {
-    "@openzeppelin/contracts-upgradeable": "^4.9.0",
+    "@openzeppelin/contracts-upgradeable": "^4.9.2",
     "@skalenetwork/ima-interfaces": "^1.0.0-stable.0",
     "@skalenetwork/upgrade-tools": "^2.0.0-refactor.17",
     "dotenv": "^16.1.4"
