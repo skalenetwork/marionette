@@ -1178,10 +1178,10 @@
     "@sentry/types" "5.30.0"
     tslib "^1.9.3"
 
-"@skalenetwork/ima-interfaces@^1.0.0-stable.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@skalenetwork/ima-interfaces/-/ima-interfaces-1.1.0.tgz#d7d1a698a7d2a31a4f9bd966abcb21a7bd0e5d1d"
-  integrity sha512-eB9/m/1pA2VCGKTJPcKJUZKeLEHKlcla0lRjd3rWxFAEqzTX8b1yX88rAkwqW0ngVxaqJ+GY/VLdiuMxkBuHMw==
+"@skalenetwork/ima-interfaces@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@skalenetwork/ima-interfaces/-/ima-interfaces-2.0.0.tgz#93cb73a5200f7d9753a44c1be3e15156e7ceaf9c"
+  integrity sha512-Kqm45GHQl56H4pqdWHIcTUfFrE60LAUKI3j2CecebN0T9rKa0DDokvE42VDa3PfK2z6XIJxh7SkF+i6NsLbpjA==
   dependencies:
     "@skalenetwork/skale-manager-interfaces" "^0.1.2"
 
