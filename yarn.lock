@@ -1190,10 +1190,10 @@
   resolved "https://registry.yarnpkg.com/@skalenetwork/skale-manager-interfaces/-/skale-manager-interfaces-0.1.2.tgz#88e543c8cc298cd0cc9559892d746d2d74786da8"
   integrity sha512-gapSQJahwWMlTB/xp/kMzB6k+9+Skx/N0fvEloiW4CUrkGkSa8+fj16YmUXX45p1hOc45W+JydiJPNgZtx32Dg==
 
-"@skalenetwork/upgrade-tools@^2.0.0-refactor.17":
-  version "2.0.0-refactor.20"
-  resolved "https://registry.yarnpkg.com/@skalenetwork/upgrade-tools/-/upgrade-tools-2.0.0-refactor.20.tgz#98a1ebc3f2dcd022316c7fe1b6158aaff80f23a6"
-  integrity sha512-m0LqIrxvPdiEBXi3OUZs+y0wS2zxgCK9OowrvoGNUMrLqtHUqNCodE45M8fvtjSMOCtg+Q0O4ijJW+9Zt7KxCg==
+"@skalenetwork/upgrade-tools@^2.0.0-168-gas-estimation-does-not-work-after-gnosis-safe-update.4":
+  version "2.0.0-168-gas-estimation-does-not-work-after-gnosis-safe-update.4"
+  resolved "https://registry.yarnpkg.com/@skalenetwork/upgrade-tools/-/upgrade-tools-2.0.0-168-gas-estimation-does-not-work-after-gnosis-safe-update.4.tgz#af6b7ebe45fcdc9397687b46d32441299e55902e"
+  integrity sha512-/AplhIUezoA6ZvqnrTOllGpBpX+YRBpmroJXmQw0zSXEU2yTwu6QJrUW0D8eU2YTdyMSu69OfQXhKv/obcdcww==
   dependencies:
     "@openzeppelin/contracts-upgradeable" "^4.4.2"
     axios "^0.27.2"
