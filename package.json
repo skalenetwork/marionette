@@ -37,7 +37,7 @@
     "@typescript-eslint/parser": "^5.62.0",
     "chai": "^4.3.10",
     "chai-as-promised": "^7.1.1",
-    "cspell": "^7.3.7",
+    "cspell": "^7.3.8",
     "eslint": "^8.51.0",
     "ethers": "^5.7.2",
     "hardhat": "^2.18.1",
