@@ -38,7 +38,7 @@
     "chai": "^4.3.10",
     "chai-as-promised": "^7.1.1",
     "cspell": "^7.3.8",
-    "eslint": "^8.54.0",
+    "eslint": "^8.55.0",
     "ethers": "^5.7.2",
     "hardhat": "^2.19.1",
     "kill-port": "^2.0.1",
