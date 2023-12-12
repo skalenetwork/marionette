@@ -45,7 +45,7 @@
     "lodash": "^4.17.21",
     "solhint": "^3.4.1",
     "solidity-coverage": "^0.8.5",
-    "ts-node": "^10.9.1",
+    "ts-node": "^10.9.2",
     "typechain": "^7.0.1",
     "typescript": "^5.3.3"
   },
