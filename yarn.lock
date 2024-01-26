@@ -3156,10 +3156,10 @@ handlebars@^4.0.1:
   optionalDependencies:
     uglify-js "^3.1.4"
 
-hardhat@^2.19.2:
-  version "2.19.2"
-  resolved "https://registry.yarnpkg.com/hardhat/-/hardhat-2.19.2.tgz#815819e4efd234941d495decb718b358d572e2c8"
-  integrity sha512-CRU3+0Cc8Qh9UpxKd8cLADDPes7ZDtKj4dTK+ERtLBomEzhRPLWklJn4VKOwjre9/k8GNd/e9DYxpfuzcxbXPQ==
+hardhat@^2.19.4:
+  version "2.19.4"
+  resolved "https://registry.yarnpkg.com/hardhat/-/hardhat-2.19.4.tgz#5112c30295d8be2e18e55d847373c50483ed1902"
+  integrity sha512-fTQJpqSt3Xo9Mn/WrdblNGAfcANM6XC3tAEi6YogB4s02DmTf93A8QsGb8uR0KR8TFcpcS8lgiW4ugAIYpnbrQ==
   dependencies:
     "@ethersproject/abi" "^5.1.2"
     "@metamask/eth-sig-util" "^4.0.0"
