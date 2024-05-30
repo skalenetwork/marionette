@@ -21,7 +21,7 @@
 
 pragma solidity 0.8.11;
 
-import "@skalenetwork/ima-interfaces/IMessageReceiver.sol";
+import {IMessageReceiver} from "@skalenetwork/ima-interfaces/IMessageReceiver.sol";
 
 
 interface IImaMock {

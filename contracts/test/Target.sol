@@ -21,8 +21,8 @@
 
 pragma solidity 0.8.11;
 
-import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
-import "@skalenetwork/ima-interfaces/IMessageReceiver.sol";
+import {AddressUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
+import {IMessageReceiver} from "@skalenetwork/ima-interfaces/IMessageReceiver.sol";
 
 
 interface ITarget {

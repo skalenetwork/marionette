@@ -21,10 +21,13 @@
 
 pragma solidity 0.8.11;
 
-import "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
-import "@skalenetwork/marionette-interfaces/Encoder.sol";
-import "@skalenetwork/marionette-interfaces/IMarionette.sol";
+import {
+    AccessControlEnumerableUpgradeable,
+    AccessControlUpgradeable
+} from "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
+import {AddressUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
+import {Encoder} from "@skalenetwork/marionette-interfaces/Encoder.sol";
+import {IMarionette} from "@skalenetwork/marionette-interfaces/IMarionette.sol";
 
 
 contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
