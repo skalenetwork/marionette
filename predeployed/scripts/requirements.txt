@@ -1,4 +1,4 @@
 build
-eth-typings < 5.0.0
+eth-typing < 5.0.0
 predeployed-generator >= 1.1.0a1
 twine
