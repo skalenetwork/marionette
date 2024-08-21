@@ -25,6 +25,6 @@
     "coverage/**",
     "docs/**",
     "typechain-types/**",
-    "venv/**"
+    "**/venv/**"
   ]
 }
