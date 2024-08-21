@@ -13,7 +13,7 @@
     "cspell": "npx cspell \"**/*\"",
     "slither": "slither .",
     "tsc": "npx tsc --noEmit",
-    "eslint": "npx eslint --cache --ext .js,.jsx,.ts,.tsx .",
+    "eslint": "npx eslint .",
     "test": "yarn tsc && npx hardhat test",
     "fullCheck": "yarn lint && yarn cspell && yarn slither && yarn tsc && yarn eslint",
     "hooks": "git config core.hooksPath .githooks || true",
@@ -52,6 +52,7 @@
   "dependencies": {
     "@openzeppelin/contracts-upgradeable": "^4.9.5",
     "@skalenetwork/ima-interfaces": "^2.0.0",
+    "@skalenetwork/marionette-interfaces": "^0.0.0-main.1",
     "@skalenetwork/upgrade-tools": "^2.0.0-refactor.17",
     "dotenv": "^16.3.1"
   }

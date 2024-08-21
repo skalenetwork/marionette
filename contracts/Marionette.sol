@@ -21,22 +21,19 @@
 
 pragma solidity 0.8.11;
 
-import "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
-import "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
-
-import "./interfaces/IMarionette.sol";
+import {
+    AccessControlEnumerableUpgradeable,
+    AccessControlUpgradeable
+} from "@openzeppelin/contracts-upgradeable/access/AccessControlEnumerableUpgradeable.sol";
+import {AddressUpgradeable} from "@openzeppelin/contracts-upgradeable/utils/AddressUpgradeable.sol";
+import {Encoder} from "@skalenetwork/marionette-interfaces/Encoder.sol";
+import {IMarionette} from "@skalenetwork/marionette-interfaces/IMarionette.sol";
 
 
 contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
 
     using AddressUpgradeable for address;
     using AddressUpgradeable for address payable;
-
-    struct FunctionCall {
-        address receiver;
-        uint value;
-        bytes data;
-    }
 
     bytes32 public constant IMA_ROLE = keccak256("IMA_ROLE");
     bytes32 public constant PUPPETEER_ROLE = keccak256("PUPPETEER_ROLE");
@@ -89,7 +86,7 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
         require(hasRole(IMA_ROLE, msg.sender), "Sender is not IMA");
         require(hasRole(PUPPETEER_ROLE, sender), ACCESS_VIOLATION);
 
-        FunctionCall memory functionCall = _parseFunctionCall(data);
+        Encoder.FunctionCall memory functionCall = _parseFunctionCall(data);
 
         bytes memory output = _doCall(payable(functionCall.receiver), functionCall.value, functionCall.data);
         emit FunctionCallResult(output);
@@ -133,7 +130,7 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
         override
         returns (bytes memory)
     {
-        return abi.encode(receiver, value, data);
+        return Encoder.encodeFunctionCall(receiver, value, data);
     }
 
     // private
@@ -161,7 +158,7 @@ contract Marionette is IMarionette, AccessControlEnumerableUpgradeable {
         }
     }
 
-    function _parseFunctionCall(bytes calldata data) private pure returns (FunctionCall memory functionCall) {
-        (functionCall.receiver, functionCall.value, functionCall.data) = abi.decode(data, (address, uint, bytes));
+    function _parseFunctionCall(bytes calldata data) private pure returns (Encoder.FunctionCall memory functionCall) {
+        return Encoder.decodeFunctionCall(data);
     }
 }
