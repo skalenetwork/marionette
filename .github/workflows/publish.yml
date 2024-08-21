@@ -12,7 +12,7 @@ on:
 
 env:
   NODE_VERSION: 20
-  PYTHON_VERSION: 3.9.x
+  PYTHON_VERSION: 3.11.x
 
 jobs:
   publish:
