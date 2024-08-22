@@ -53,7 +53,7 @@
     "@openzeppelin/contracts-upgradeable": "^4.9.5",
     "@skalenetwork/ima-interfaces": "^2.0.0",
     "@skalenetwork/marionette-interfaces": "^0.0.0-main.1",
-    "@skalenetwork/upgrade-tools": "^2.0.0-refactor.17",
+    "@skalenetwork/upgrade-tools": "^2.0.2",
     "dotenv": "^16.3.1"
   }
 }
