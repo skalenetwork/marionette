@@ -1322,19 +1322,19 @@
     "@sentry/types" "5.30.0"
     tslib "^1.9.3"
 
-"@skalenetwork/ima-interfaces@^2.0.0":
+"@skalenetwork/ima-interfaces@^2.0.0", "@skalenetwork/ima-interfaces@^2.0.0-paymaster.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@skalenetwork/ima-interfaces/-/ima-interfaces-2.0.0.tgz#93cb73a5200f7d9753a44c1be3e15156e7ceaf9c"
   integrity sha512-Kqm45GHQl56H4pqdWHIcTUfFrE60LAUKI3j2CecebN0T9rKa0DDokvE42VDa3PfK2z6XIJxh7SkF+i6NsLbpjA==
   dependencies:
     "@skalenetwork/skale-manager-interfaces" "^0.1.2"
 
-"@skalenetwork/marionette-interfaces@^0.0.0-main.1":
-  version "0.0.0-main.1"
-  resolved "https://registry.yarnpkg.com/@skalenetwork/marionette-interfaces/-/marionette-interfaces-0.0.0-main.1.tgz#1326becd61ccbb70f02133980b88b41137d45184"
-  integrity sha512-+/xOMbHtAISm6XsnLPi9w9ymBwoVHPEci6sN3tsqGoFJkEYq2MxdgwbL0qXWW7p5Yp+X+BwXFIOBNptV4Ec7Dw==
+"@skalenetwork/marionette-interfaces@^0.0.0-main.13":
+  version "0.0.0-main.13"
+  resolved "https://registry.yarnpkg.com/@skalenetwork/marionette-interfaces/-/marionette-interfaces-0.0.0-main.13.tgz#a2dd5146441f096815f256b041c65894a142eb1c"
+  integrity sha512-UGSmOdHwKSEHC8UEfEdLA1B4z2ajqK+hOv3FedQDjxp2HV2DFFPDkfNdu56xO9LmOX/YC8Qta5bH6LuLhIOENQ==
   dependencies:
-    "@skalenetwork/ima-interfaces" "^2.0.0"
+    "@skalenetwork/ima-interfaces" "^2.0.0-paymaster.0"
 
 "@skalenetwork/skale-manager-interfaces@^0.1.2":
   version "0.1.2"
