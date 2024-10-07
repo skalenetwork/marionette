@@ -52,7 +52,7 @@
   "dependencies": {
     "@openzeppelin/contracts-upgradeable": "^4.9.6",
     "@skalenetwork/ima-interfaces": "^2.0.0",
-    "@skalenetwork/marionette-interfaces": "^0.0.0-main.1",
+    "@skalenetwork/marionette-interfaces": "^0.0.0-main.15",
     "@skalenetwork/upgrade-tools": "^2.0.2",
     "dotenv": "^16.4.5"
   }
