@@ -1347,10 +1347,10 @@
   dependencies:
     "@skalenetwork/skale-manager-interfaces" "^0.1.2"
 
-"@skalenetwork/marionette-interfaces@^0.0.0-main.26":
-  version "0.0.0-main.26"
-  resolved "https://registry.yarnpkg.com/@skalenetwork/marionette-interfaces/-/marionette-interfaces-0.0.0-main.26.tgz#6f81479a761bf56b1a07f19a0ee0fa9d24ea7d2a"
-  integrity sha512-dqMUaDLb/B1ZY+xq807vOik7hGYCHXq5vGXYWOozeiHTwH9S2PzoC+JK6PAS3AqOEBwdRDpfcCqu50gbRzFXpg==
+"@skalenetwork/marionette-interfaces@^0.0.0-main.28":
+  version "0.0.0-main.28"
+  resolved "https://registry.yarnpkg.com/@skalenetwork/marionette-interfaces/-/marionette-interfaces-0.0.0-main.28.tgz#5bfe4f5730196168489c0cbb91a93c1936ce66d1"
+  integrity sha512-I1tfYdg28f3uO6dLSuTajgzSxLRkv2QD+nOdP+J4ubZ8cg+s3RBVmhuVmYVVjErP2D3+3dojBMZRwl+krritKQ==
   dependencies:
     "@skalenetwork/ima-interfaces" "^2.0.0-paymaster.0"
 
