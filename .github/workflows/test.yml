@@ -55,10 +55,14 @@ jobs:
     - name: Install python testing staff
       run: pip3 install -r predeployed/test/requirements.txt
 
-    - name: Install geth
+    - name: Install geth v1.13.15
       run: |
-        sudo add-apt-repository -y ppa:ethereum/ethereum
-        sudo apt install ethereum
+        wget https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-1.13.15-c5ba367e.tar.gz
+        tar -xvf geth-linux-amd64-1.13.15-c5ba367e.tar.gz
+        sudo mv geth-linux-amd64-1.13.15-c5ba367e/geth /usr/local/bin/geth
+        geth version
+        which geth
+        rm -rf geth-linux-amd64-1.13.15-c5ba367e.tar.gz geth-linux-amd64-1.13.15-c5ba367e
 
     - name: Check types
       run: mypy predeployed/src
