@@ -1,5 +1,16 @@
 # Marionette
 
+<div align="center">
+
+[![License](https://img.shields.io/github/license/skalenetwork/marionette.svg)](LICENSE)
+[![Discord](https://img.shields.io/discord/534485763354787851.svg)](https://discord.gg/skale)
+[![Build Status](https://github.com/skalenetwork/marionette/actions/workflows/test.yml/badge.svg)](https://github.com/skalenetwork/marionette/actions)
+[![codecov](https://codecov.io/gh/skalenetwork/marionette/branch/develop/graph/badge.svg)](https://codecov.io/gh/skalenetwork/marionette)
+
+<p>A smart contract for orchestrating operations in SKALE chains</p>
+
+</div>
+
 ## Introduction
 
 Marionette is a predeployed smart contract that acts as an access gateway in SKALE-chains. The only entity with access to Marionette contract is the SKALE chain owner registered in Skale-Manager. If this entity is an EOA account, it can control Marionette directly. If this entity is a MultiSig wallet, it must interact with Marionette through SKALE's IMA bridge.
@@ -164,3 +175,12 @@ Examples:
 - **SKALE Whitepaper** – Whitepaper of SKALE Network: https://skale.space/whitepaper
 - **SKALE Main Website** – High-level overview of the network, architecture, and ecosystem: https://www.skale.space/
 - **SKALE Ecosystem Portal** – Explorer, bridges, staking dashboard, live chains & projects: https://portal.skale.space/
+
+
+## License
+
+[![License](https://img.shields.io/github/license/skalenetwork/marionette.svg)](LICENSE)
+
+All contributions are made under the [GNU Affero General Public License v3](https://www.gnu.org/licenses/agpl-3.0.en.html). See [LICENSE](LICENSE).
+
+Copyright (C) 2021-Present SKALE Labs
