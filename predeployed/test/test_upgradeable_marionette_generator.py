@@ -1,4 +1,4 @@
-from pkg_resources import get_distribution
+from importlib.metadata import version
 from web3.auto import w3
 from predeployed_generator.openzeppelin.proxy_admin_generator import ProxyAdminGenerator
 
@@ -85,4 +85,4 @@ class TestUpgradeableMarionetteGenerator(TestSolidityProject):
 
             marionette = w3.eth.contract(address=MARIONETTE_ADDRESS, abi=self.get_marionette_abi())
 
-            assert marionette.functions.version().call() == get_distribution('marionette_predeployed').version
+            assert marionette.functions.version().call() == version('marionette_predeployed')
