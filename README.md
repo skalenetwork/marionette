@@ -168,6 +168,15 @@ Examples:
  * EUROPA: https://elated-tan-skat.explorer.mainnet.skalenodes.com/address/0xD2c0DeFACe000000000000000000000000000000
 
 
+
+## Security and Audits
+
+External audits of Marionette will appear here. See other audits of SKALE components in https://docs.skale.space/audits-and-security/
+
+### Bug Bounty Programs
+
+Please see [HackerOne](https://hackerone.com/skale_network?type=team) for SKALE's active bug bounty program **or** submit a bug directly via [encrypted email](mailto:security@skalelabs.com).
+
 ## Resources
 
 - **SKALE Developer Documentation** – https://docs.skale.space/
