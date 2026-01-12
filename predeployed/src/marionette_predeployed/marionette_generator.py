@@ -2,7 +2,7 @@
 
 from os.path import dirname, join
 from typing import Dict
-from pkg_resources import get_distribution
+from importlib.metadata import version
 
 from predeployed_generator.openzeppelin.access_control_enumerable_generator \
     import AccessControlEnumerableGenerator
@@ -87,6 +87,6 @@ class MarionetteGenerator(AccessControlEnumerableGenerator):
         cls._write_string(
             storage,
             cls.VERSION_SLOT,
-            get_distribution('marionette_predeployed').version)
+            version('marionette_predeployed'))
 
         return storage

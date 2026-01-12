@@ -17,7 +17,14 @@
     "shanghaiTime": 0,
     "cancunTime": 0,
     "terminalTotalDifficulty": 0,
-    "terminalTotalDifficultyPassed": true
+    "terminalTotalDifficultyPassed": true,
+    "blobSchedule": {
+      "cancun": {
+        "target": 3,
+        "max": 6,
+        "baseFeeUpdateFraction": 3338477
+      }
+    }
   },
   "nonce": "0x0",
   "timestamp": "0x0",
@@ -35,6 +42,6 @@
   "gasUsed": "0x0",
   "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
   "baseFeePerGas": "0x3b9aca00",
-  "excessBlobGas": null,
-  "blobGasUsed": null
+  "excessBlobGas": "0x0",
+  "blobGasUsed": "0x0"
 }
